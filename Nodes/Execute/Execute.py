@@ -8,7 +8,7 @@
 # **********************************************************************************
 import json
 
-from rpio.clientLibraries.rpclpy.node import Node
+from rpclpy.node import Node
 from .messages import *
 import time
 #<!-- cc_include START--!>

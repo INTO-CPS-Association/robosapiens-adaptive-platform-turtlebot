@@ -6,7 +6,7 @@
 # * RAP R&D concepts can not be copied and/or distributed without the express
 # * permission of Bert Van Acker
 # **********************************************************************************
-from rpio.clientLibraries.rpclpy.node import Node
+from rpclpy.node import Node
 from .messages import *
 import time
 #<!-- cc_include START--!>
