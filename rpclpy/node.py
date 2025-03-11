@@ -11,6 +11,7 @@ class Node:
         # 'memcached': {"host": "127.0.0.1", "port": 11211},
         # self.knowledge = self._initialize_knowledge()  # Initialize knowledge within the component
         self.knowledge = KnowledgeManager("redis", {"host": "localhost", "port": 6379, "db": 0})
+        # self.knowledge = KnowledgeManager('memcached', {"host": "127.0.0.1", "port": 11211})
         self.communication_manager = CommunicationManager("mqtt", {"broker": "localhost", "port": 1883})
         # self.communication_manager = CommunicationManager("redis", {"host": "localhost", "port": 6379})
         # self.communication_manager = self._initialize_communication_manager()  # Initialize Event manager
@@ -95,8 +96,7 @@ class Node:
             except json.JSONDecodeError:
                 pass  # If it's not JSON, return it as a string
         return value
-        
-        return self.knowledge.read(key, queueSize)
+
     def write_knowledge(self, key, value):
         """Write a value to the Knowledge Manager."""
         if isinstance(key, str):

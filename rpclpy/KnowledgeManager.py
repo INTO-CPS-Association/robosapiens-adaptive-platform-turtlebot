@@ -59,21 +59,7 @@ class KnowledgeManager:
     def write(self, key, value):
         """Write a key-value pair to the backend."""
         if self.backend == 'redis':
-            if isinstance(key, str):
-                return self.client.set(key, value)
-            else:
-                # Convert the class instance to a dictionary
-                class_dict = {}
-                for key, value in key.__dict__.items():
-
-                    # Remove leading underscore for protected attributes
-                    public_key = key.lstrip('_')
-
-                    # Add the attribute to the dictionary
-                    class_dict[public_key] = value
-
-                value = json.dumps(class_dict)  # Serialize the dictionary to a JSON string
-                return self.client.set(key.name, value)
+            return self.client.set(key, value)
         elif self.backend == 'memcached':
             return self.client.set(key, value)
         elif self.backend == 'ignite':
@@ -231,14 +217,14 @@ def benchmark_operations(backend, config, num_operations=1000):
 if __name__ == '__main__':
     # Define backend configurations here. Adjust values as needed for your environment.
     backend_configs = {
-        'redis': {"host": "localhost", "port": 6379, "db": 0},
+        # 'redis': {"host": "localhost", "port": 6379, "db": 0},
         'memcached': {"host": "127.0.0.1", "port": 11211},
         # 'ignite': {"host": "127.0.0.1", "port": 10800}, #TODO:Test this
         # 'hazelcast': {},  # Provide Hazelcast-specific configuration if needed. #TODO:Test this
         # 'tarantool': {"host": "127.0.0.1", "port": 3301}, #TODO:Test this
         # 'aerospike': {"host": "127.0.0.1", "port": 3000}, #TODO:Test this
         # 'kafka': {"bootstrap_servers": "localhost:9092", "topic": "knowledge"}, #TODO:Test this
-        'sqlite': {}  # No configuration required for in-memory SQLite.
+        # 'sqlite': {}  # No configuration required for in-memory SQLite.
     }
 
     # Benchmark each backend.
