@@ -30,8 +30,8 @@ class Legitimate(Node):
         #<!-- cc_init END--!>
     # -----------------------------AUTO-GEN SKELETON FOR executer-----------------------------
     def legitimate(self,msg):
-        isLegit = self.knowledge.read("isLegit",queueSize=1)
-        directions = self.knowledge.read("directions",queueSize=1)
+        isLegit = self.read_knowledge("isLegit",queueSize=1)
+        directions = self.read_knowledge("directions",queueSize=1)
         _Direction = Direction()
 
         #<!-- cc_code_executer START--!>

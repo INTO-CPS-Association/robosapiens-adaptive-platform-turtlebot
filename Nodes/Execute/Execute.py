@@ -33,8 +33,8 @@ class Execute(Node):
 
     # -----------------------------AUTO-GEN SKELETON FOR executer-----------------------------
     def executer(self,msg):
-        isLegit = self.knowledge.read("isLegit",queueSize=1)
-        directions = self.knowledge.read("directions",queueSize=1)
+        isLegit = self.read_knowledge("isLegit",queueSize=1)
+        directions = self.read_knowledge("directions",queueSize=1)
         _Direction = Direction()
 
         #<!-- cc_code_executer START--!>
@@ -44,7 +44,7 @@ class Execute(Node):
             time.sleep(0.1)
         self.logger.info(f"Executed with directions = {directions}");
         self.publish_event(event_key='/spin_config',message=json.dumps(directions))    # LINK <outport> spin_config
-        self.knowledge.write("handling_anomaly", 0)
+        self.read_knowledge("handling_anomaly", 0)
         #<!-- cc_code_executer END--!>
 
     def register_callbacks(self):

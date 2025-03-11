@@ -59,7 +59,21 @@ class KnowledgeManager:
     def write(self, key, value):
         """Write a key-value pair to the backend."""
         if self.backend == 'redis':
-            return self.client.set(key, value)
+            if isinstance(key, str):
+                return self.client.set(key, value)
+            else:
+                # Convert the class instance to a dictionary
+                class_dict = {}
+                for key, value in key.__dict__.items():
+
+                    # Remove leading underscore for protected attributes
+                    public_key = key.lstrip('_')
+
+                    # Add the attribute to the dictionary
+                    class_dict[public_key] = value
+
+                value = json.dumps(class_dict)  # Serialize the dictionary to a JSON string
+                return self.client.set(key.name, value)
         elif self.backend == 'memcached':
             return self.client.set(key, value)
         elif self.backend == 'ignite':
@@ -87,7 +101,7 @@ class KnowledgeManager:
                 self.conn.rollback()
                 return False
 
-    def read(self, key):
+    def read(self, key, queueSize = 1):
         """Read the value for a given key from the backend."""
         if self.backend == 'redis':
             return self.client.get(key)

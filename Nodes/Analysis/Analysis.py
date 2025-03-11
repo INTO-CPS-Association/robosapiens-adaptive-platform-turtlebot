@@ -72,7 +72,7 @@ class Analysis(Node):
 
     # -----------------------------AUTO-GEN SKELETON FOR analyse_scan_data-----------------------------
     def analyse_scan_data(self,msg):
-        laser_scan = self.knowledge.read("laser_scan",queueSize=1)
+        laser_scan = self.read_knowledge("laser_scan",queueSize=1)
 
         #<!-- cc_code_analyse_scan_data START--!>
 
@@ -108,16 +108,16 @@ class Analysis(Node):
         self.logger.info(f" - Lidar mask: {lidar_mask}")
         serialized_lidar_mask = lidar_mask.to_json()
 
-        self.knowledge.write("lidar_mask", serialized_lidar_mask)
+        self.write_knowledge("lidar_mask", serialized_lidar_mask)
 
-        handling_anomaly = self.knowledge.read("handling_anomaly")
+        handling_anomaly = self.read_knowledge("handling_anomaly")
 
         # We should not try and handle two anomalies at once!
         if handling_anomaly:
             self.logger.info("Terminating Analysis early as we are already handling an anomaly")
             return
 
-        planned_lidar_mask_data = self.knowledge.redis_client.get('planned_lidar_mask')
+        planned_lidar_mask_data = self.knowledge.client.get('planned_lidar_mask')
         if planned_lidar_mask_data is None:
             self.logger.info("No planned lidar mask in knowledge")
             planned_lidar_mask = BoolLidarMask([],
@@ -130,7 +130,7 @@ class Analysis(Node):
         # occlusion outside of the ignored region
         self.logger.info(f"planned_lidar_mask = {planned_lidar_mask}")
         if lidar_mask.dist(planned_lidar_mask) > REPLANNING_SENSITIVITY:
-            self.knowledge.write("handling_anomaly", 1)
+            self.write_knowledge("handling_anomaly", 1)
             self.publish_event(event_key='anomaly')
             self.logger.info(f"Anomaly: True")
         else:

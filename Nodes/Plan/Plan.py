@@ -120,7 +120,7 @@ class Plan(Node):
         # we need support for custom deserialization, so for now we manually
         # retrieve the key from Redis
         # lidar_data = json.dumps(self.knowledge.read("laser_scan"))
-        lidar_data = self.knowledge.redis_client.get('lidar_mask')
+        lidar_data = self.knowledge.read('lidar_mask')
         if lidar_data is None:
             raise Exception("No lidar mask available in knowledge mask")
         else:
@@ -128,7 +128,7 @@ class Plan(Node):
 
         lidar_mask = BoolLidarMask.from_json(lidar_data)
         # Record the LiDAR mask we last did planning from in the knowledge base
-        self.knowledge.write("planned_lidar_mask", lidar_data)
+        self.write_knowledge("planned_lidar_mask", lidar_data)
         #The upper code must be deleted later
 
         try:
@@ -137,7 +137,7 @@ class Plan(Node):
 
             occlusion_angles = calculate_lidar_occlusion_rotation_angles(lidar_mask)
             directions = occlusion_angles_to_rotations(occlusion_angles)
-            self.knowledge.write("directions", json.dumps(directions))
+            self.write_knowledge("directions", json.dumps(directions))
             self.logger.info(f"- Plan action written to knowledge :{directions}")
             new_plan = True
         except:
@@ -153,7 +153,7 @@ class Plan(Node):
                 self.logger.info("Planning")
                 time.sleep(0.1)
             self.publish_event("new_plan")
-            self.knowledge.write("directions", json.dumps({'commands': directions, 'period': 8}))
+            self.write_knowledge("directions", json.dumps({'commands': directions, 'period': 8}))
             self.logger.info(f"Stored planned action: {directions}")
         #<!-- cc_code_planner END--!>
 

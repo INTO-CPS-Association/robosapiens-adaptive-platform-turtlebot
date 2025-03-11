@@ -230,7 +230,7 @@ class CommunicationManager:
             self._zenoh_session.declare_subscriber(topic, zenoh_callback)
         # For Kafka, WebSocket, and TCP dynamic subscription is not handled
 
-    def publish(self, topic, message):
+    def publish(self, topic, message = "True"):
         """Publish a message to the specified topic."""
         if topic not in self.publish_topics:
             self.publish_topics.append(topic)
