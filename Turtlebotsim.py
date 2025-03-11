@@ -8,15 +8,13 @@ from tkinter import messagebox
 import random
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from rpclpy.CommunicationManager import CommunicationManager
 
 # MQTT setup
 MQTT_BROKER = "localhost"
 POSE_TOPIC = "/pose"
 SCAN_TOPIC = "/Scan"
 SPIN_CONFIG_TOPIC = "/spin_config"
-
-client = mqtt.Client()
-client.connect(MQTT_BROKER)
 
 # TurtleBotSim class
 class TurtleBotSim:
@@ -175,9 +173,9 @@ NAV2_button = tk.Button(root, text="Toggle NAV2", command=toggle_NAV2)
 # NAV2_button.pack()
 NAV2_button.grid(row=2, column=0, sticky="ew", padx=300, pady=5)  # Expand horizontally
 # MQTT Spin Command Listener
-def on_message(client, userdata, message):
+def on_message(message):
     try:
-        payload = json.loads(message.payload.decode())
+        payload = json.loads(message)
         if payload.get("commands") :
             plan = payload.get("commands")[0]
             duration = plan.get("duration")
@@ -189,9 +187,7 @@ def on_message(client, userdata, message):
         sim.standard_navigation = True
         print("Invalid JSON in spin config")
 
-client.subscribe(SPIN_CONFIG_TOPIC)
-client.on_message = on_message
-client.loop_start()
+
 
 def stop_periodic_update():
     # Cancel any pending 'after' events
@@ -207,7 +203,15 @@ def periodic_update():
     update_map()
     periodic_update_id = root.after(1000, periodic_update)
 
-periodic_update()
-# Bind the window close event to stop the periodic update
-root.protocol("WM_DELETE_WINDOW", stop_periodic_update)
-root.mainloop()
+
+
+if __name__ == "__main__":
+    # client = CommunicationManager("mqtt", {"broker": "localhost", "port": 1883})
+    client = communication_manager = CommunicationManager("rabbitmq", {"host": "localhost", "port": 5672})
+    client.subscribe(SPIN_CONFIG_TOPIC, callback=on_message)
+    # client.on_message = on_message
+    client.start()
+    periodic_update()
+    # Bind the window close event to stop the periodic update
+    root.protocol("WM_DELETE_WINDOW", stop_periodic_update)
+    root.mainloop()

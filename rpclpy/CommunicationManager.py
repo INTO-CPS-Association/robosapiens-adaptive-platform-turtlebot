@@ -357,29 +357,29 @@ def test_communication_manager(protocol, config):
 if __name__ == "__main__":
     # Configuration for each protocol is defined in the main script.
     protocols_config = {
-        "mqtt": {"broker": "localhost", "port": 1883},
+        # "mqtt": {"broker": "localhost", "port": 1883},
         "rabbitmq": {"host": "localhost", "port": 5672},
         # "kafka": {"bootstrap_servers": "localhost:9092"}, #TODO: Add Kafka configuration, test the Kafka protocol
-        "redis": {"host": "localhost", "port": 6379},
+        # "redis": {"host": "localhost", "port": 6379},
         # "zenoh": {},  # Add Zenoh configuration if necessary TODO: Add Zenoh configuration, test the Zenoh protocol
-        "websocket": {"url": "ws://localhost:8765"},
-        "tcp": {"host": "localhost", "port": 9000}
+        # "websocket": {"url": "ws://localhost:8765"},
+        # "tcp": {"host": "localhost", "port": 9000}
     }
 
-    # Start WebSocket and TCP echo servers for testing.
-    try:
-        ws_server = start_ws_echo_server("localhost", 8765)
-        time.sleep(1)
-    except Exception as e:
-        print("WebSocket server failed to start:", e)
-        protocols_config.pop("websocket", None)
+    # # Start WebSocket and TCP echo servers for testing.
+    # try:
+    #     ws_server = start_ws_echo_server("localhost", 8765)
+    #     time.sleep(1)
+    # except Exception as e:
+    #     print("WebSocket server failed to start:", e)
+    #     protocols_config.pop("websocket", None)
 
-    try:
-        tcp_server = start_tcp_echo_server("localhost", 9000)
-        time.sleep(1)
-    except Exception as e:
-        print("TCP echo server failed to start:", e)
-        protocols_config.pop("tcp", None)
+    # try:
+    #     tcp_server = start_tcp_echo_server("localhost", 9000)
+    #     time.sleep(1)
+    # except Exception as e:
+    #     print("TCP echo server failed to start:", e)
+    #     protocols_config.pop("tcp", None)
 
     results = {}
     for proto, conf in protocols_config.items():
