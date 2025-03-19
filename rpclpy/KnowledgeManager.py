@@ -8,7 +8,7 @@ def random_string(length=10):
 
 
 class KnowledgeManager:
-    def __init__(self, backend, config):
+    def __init__(self, config):
         """
         Initialize the KnowledgeManager with a chosen backend.
         Supported backends: redis, memcached, ignite, hazelcast, tarantool, aerospike, kafka, sqlite
@@ -16,7 +16,7 @@ class KnowledgeManager:
         :param backend: A string representing the backend to use.
         :param config: A dictionary containing all configuration parameters needed by the backend.
         """
-        self.backend = backend.lower()
+        self.backend = config["knowledge_type"]
         if self.backend == 'redis':
             import redis
             self.client = redis.Redis(host=config["host"], port=config["port"], db=config["db"])
@@ -217,8 +217,8 @@ def benchmark_operations(backend, config, num_operations=1000):
 if __name__ == '__main__':
     # Define backend configurations here. Adjust values as needed for your environment.
     backend_configs = {
-        # 'redis': {"host": "localhost", "port": 6379, "db": 0},
-        'memcached': {"host": "127.0.0.1", "port": 11211},
+        'redis': {"host": "localhost", "port": 6379, "db": 0},
+        # 'memcached': {"host": "127.0.0.1", "port": 11211},
         # 'ignite': {"host": "127.0.0.1", "port": 10800}, #TODO:Test this
         # 'hazelcast': {},  # Provide Hazelcast-specific configuration if needed. #TODO:Test this
         # 'tarantool': {"host": "127.0.0.1", "port": 3301}, #TODO:Test this
