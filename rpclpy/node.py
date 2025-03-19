@@ -2,19 +2,21 @@ import yaml
 import logging
 from rpclpy.CommunicationManager import CommunicationManager
 from rpclpy.KnowledgeManager import KnowledgeManager
+from rpclpy.LoggingAndTracking import LoggingAndTrackingHandler
 import json
 
 class Node:
     def __init__(self, config, verbose = False):
         self.config = self.load_config(config)
         self.logger = self._initialize_logger()
+
         # 'memcached': {"host": "127.0.0.1", "port": 11211},
         # self.knowledge = self._initialize_knowledge()  # Initialize knowledge within the component
         self.knowledge = KnowledgeManager("redis", {"host": "localhost", "port": 6379, "db": 0})
         # self.knowledge = KnowledgeManager('memcached', {"host": "127.0.0.1", "port": 11211})
         # self.communication_manager = CommunicationManager("mqtt", {"broker": "localhost", "port": 1883})
-        self.communication_manager = CommunicationManager("rabbitmq", {"host": "localhost", "port": 5672})
-        # self.communication_manager = CommunicationManager("redis", {"host": "localhost", "port": 6379})
+        # self.communication_manager = CommunicationManager("rabbitmq", {"host": "localhost", "port": 5672})
+        self.communication_manager = CommunicationManager("redis", {"host": "localhost", "port": 6379})
         # self.communication_manager = self._initialize_communication_manager()  # Initialize Event manager
         
         
@@ -28,26 +30,28 @@ class Node:
             return yaml.safe_load(file)
 
     def _initialize_logger(self):
-        """Initialize the logger (same as before)."""
-        log_config = self.config.get("logging", {})
+        config = {
+            'log_level': 'DEBUG',
+            'logger_type': 'redis',  # Change to 'terminal', 'file', 'mqtt', or 'redis' as needed.
+            'terminal': {},
+            'file': {'filename': 'app.log'},
+            'mqtt': {'broker': 'localhost', 'port': 1883, 'topic': 'logs'},
+            'redis': {'host': 'localhost', 'port': 6379, 'channel': 'logs'}
+        }
+
+        # Create the main logger.
         logger = logging.getLogger(self.__class__.__name__)
-        log_level = log_config.get("level", "INFO").upper()
-        logger.setLevel(getattr(logging, log_level, logging.INFO))
+        logger.setLevel(logging.DEBUG)
 
-        log_format = log_config.get("format", "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-        log_file = log_config.get("file", None)
-        
+        # Instantiate the custom logging handler.
+        custom_handler = LoggingAndTrackingHandler(config)
+
+        # Set the formatter here in main (instead of inside the class).
+        log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
         formatter = logging.Formatter(log_format)
-
-        if log_file:
-            file_handler = logging.FileHandler(log_file)
-            file_handler.setFormatter(formatter)
-            logger.addHandler(file_handler)
-        else:
-            console_handler = logging.StreamHandler()
-            console_handler.setFormatter(formatter)
-            logger.addHandler(console_handler)
-
+        custom_handler.setFormatter(formatter)
+        logger.addHandler(custom_handler)
+        
         return logger
 
     def _initialize_knowledge(self):
@@ -72,10 +76,11 @@ class Node:
         if self.communication_manager:
             self.communication_manager.stop()
 
-    def publish_event(self, event_key, message = True):
+    def publish_event(self, event_key, message = "True"):
         """Publish Event using the Event manager."""
         if self.communication_manager:
             self.communication_manager.publish(event_key, message)
+            # print (f"Event Key: {event_key}, Message: {message}")
         else:
             self.logger.warning("Event manager is not set for Event publishing.")
 

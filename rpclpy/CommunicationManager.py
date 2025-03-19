@@ -358,9 +358,9 @@ if __name__ == "__main__":
     # Configuration for each protocol is defined in the main script.
     protocols_config = {
         # "mqtt": {"broker": "localhost", "port": 1883},
-        "rabbitmq": {"host": "localhost", "port": 5672},
+        # "rabbitmq": {"host": "localhost", "port": 5672},
         # "kafka": {"bootstrap_servers": "localhost:9092"}, #TODO: Add Kafka configuration, test the Kafka protocol
-        # "redis": {"host": "localhost", "port": 6379},
+        "redis": {"host": "localhost", "port": 6379},
         # "zenoh": {},  # Add Zenoh configuration if necessary TODO: Add Zenoh configuration, test the Zenoh protocol
         # "websocket": {"url": "ws://localhost:8765"},
         # "tcp": {"host": "localhost", "port": 9000}

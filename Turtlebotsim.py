@@ -193,7 +193,7 @@ def stop_periodic_update():
     # Cancel any pending 'after' events
     print("closing the program")
     root.after_cancel(periodic_update_id)
-    client.loop_stop()
+    client.stop()
     root.quit()
     root.destroy()
 
@@ -207,7 +207,8 @@ def periodic_update():
 
 if __name__ == "__main__":
     # client = CommunicationManager("mqtt", {"broker": "localhost", "port": 1883})
-    client = communication_manager = CommunicationManager("rabbitmq", {"host": "localhost", "port": 5672})
+    # client = communication_manager = CommunicationManager("rabbitmq", {"host": "localhost", "port": 5672})
+    client = CommunicationManager("redis", {"host": "localhost", "port": 6379})
     client.subscribe(SPIN_CONFIG_TOPIC, callback=on_message)
     # client.on_message = on_message
     client.start()
