@@ -2,12 +2,12 @@ import threading
 import time
 
 class CommunicationManager:
-    def __init__(self, protocol, config):
+    def __init__(self,config):
         """
         Initialize the communication manager with the given protocol and configuration.
         Protocol-specific modules are imported here.
         """
-        self.protocol = protocol.lower()
+        self.protocol = config.get('protocol')
         self.config = config
         self.publish_topics = []
         self.subscribe_topics = []

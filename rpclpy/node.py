@@ -10,47 +10,28 @@ class Node:
         # self.config = self.load_config(config)
         self.config = config
         self.logger = self._initialize_logger()
-
-        # 'memcached': {"host": "127.0.0.1", "port": 11211},
         self.knowledge = self._initialize_knowledge()  # Initialize knowledge within the component
-        # self.knowledge = KnowledgeManager("redis", {"host": "localhost", "port": 6379, "db": 0})
-        # self.knowledge = KnowledgeManager('memcached', {"host": "127.0.0.1", "port": 11211})
-        # self.knowledge = KnowledgeManager('sqlite', {})
-        # self.communication_manager = CommunicationManager("mqtt", {"broker": "localhost", "port": 1883})
-        # self.communication_manager = CommunicationManager("rabbitmq", {"host": "localhost", "port": 5672})
-        self.communication_manager = CommunicationManager("redis", {"host": "localhost", "port": 6379})
-        # self.communication_manager = self._initialize_communication_manager()  # Initialize Event manager
-        
-        
+        self.event_manager = self._initialize_event_manager()
+        self.message_manager = self._initialize_message_manager()
 
         # Initialize MQTT and ROS2 Event
-        if self.communication_manager:
-            self.logger.info(f"{self.__class__.__name__} is using Communication Manager")
+        if self.event_manager:
+            self.logger.info(f"{self.__class__.__name__} is using {self.config['Event_Manager_Config']['protocol']} Communication Manager")
+        if self.message_manager:
+            self.logger.info(f"{self.__class__.__name__} is using {self.config['Event_Manager_Config']['protocol']} Communication Manager")
 
     def load_config(self, config_file):
         with open(config_file, 'r') as file:
             return yaml.safe_load(file)
 
     def _initialize_logger(self):
-        logger_config = {
-            'log_level': 'DEBUG',
-            'logger_type': 'redis',  # Change to 'terminal', 'file', 'mqtt', or 'redis' as needed.
-            'terminal': {},
-            'file': {'filename': 'app.log'},
-            'mqtt': {'broker': 'localhost', 'port': 1883, 'topic': 'logs'},
-            'redis': {'host': 'localhost', 'port': 6379, 'channel': 'logs'}
-        }
 
         # Create the main logger.
         logger = logging.getLogger(self.__class__.__name__)
-        logger.setLevel(logging.DEBUG)
-
+        logger.setLevel(self.config['Logger_Config']['log_level'])
         # Instantiate the custom logging handler.
-        custom_handler = LoggingAndTrackingHandler(logger_config)
-
-        # Set the formatter here in main (instead of inside the class).
-        log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-        formatter = logging.Formatter(log_format)
+        custom_handler = LoggingAndTrackingHandler(self.config['Logger_Config'])
+        formatter = logging.Formatter(self.config['Logger_Config']['format'])
         custom_handler.setFormatter(formatter)
         logger.addHandler(custom_handler)
 
@@ -60,37 +41,60 @@ class Node:
         """Initialize the Knowledge object based on the config."""
         self.logger.info(f"Initializing Knowledge: {self.config['Knowledge_Config']['knowledge_type']} knowledge")
         return KnowledgeManager(self.config['Knowledge_Config'])
-
-    def _initialize_communication_manager(self):
-        """Initialize the Event Manager based on the config."""
+    
+    def _initialize_event_manager(self):
+        "Initialize the Event Manager based on the config."""
         self.logger.info("Initializing Event Manager")
-        return CommunicationManager(self.config, self.knowledge, self.logger)
+        return CommunicationManager(config=self.config['Event_Manager_Config'])
+    
+    def _initialize_message_manager(self):
+        """Initialize the IO Manager based on the config."""
+        self.logger.info("Initializing IO Manager")
+        return CommunicationManager(config=self.config['Message_Manager_Config'])
 
     def start(self):
         """Start the component and enable Event."""
         self.logger.info(f"{self.__class__.__name__} is starting...")
-        if self.communication_manager:
-            self.communication_manager.start()
+        if self.event_manager:
+            self.event_manager.start()
+        if self.message_manager:
+            self.message_manager.start()
 
     def shutdown(self):
         """Shutdown the component and stop Event."""
         self.logger.info(f"{self.__class__.__name__} is shutting down...")
-        if self.communication_manager:
-            self.communication_manager.stop()
+        if self.event_manager:
+            self.event_manager.stop()
+        if self.message_manager:
+            self.message_manager.stop()
 
     def publish_event(self, event_key, message = "True"):
         """Publish Event using the Event manager."""
-        if self.communication_manager:
-            self.communication_manager.publish(event_key, message)
+        if self.event_manager:
+            self.event_manager.publish(event_key, message)
             # print (f"Event Key: {event_key}, Message: {message}")
         else:
             self.logger.warning("Event manager is not set for Event publishing.")
 
+    def publish_message(self, event_key, message = "True"):
+        """Publish Event using the Event manager."""
+        if self.message_manager:
+            self.message_manager.publish(event_key, message)
+        else:
+            self.logger.warning("Event manager is not set for Event publishing.")
 
     def register_event_callback(self, event_key, callback):
         """Register a callback for Event manager events (MQTT or Redis)."""
-        if self.communication_manager:
-            self.communication_manager.subscribe(event_key, callback)
+        if self.event_manager:
+            self.event_manager.subscribe(event_key, callback)
+            self.logger.info(f"Registered callback for event: {event_key}")
+        else:
+            self.logger.warning("Event manager is not set for registering event callbacks.")
+
+    def register_message_callback(self, event_key, callback):
+        """Register a callback for Event manager events (MQTT or Redis)."""
+        if self.message_manager:
+            self.message_manager.subscribe(event_key, callback)
             self.logger.info(f"Registered callback for event: {event_key}")
         else:
             self.logger.warning("Event manager is not set for registering event callbacks.")

@@ -1,17 +1,13 @@
 {
   "Monitor_Config": {
-    "logger": {
-      "endpoints": [
-        {
-          "endpoint": {
-            "type": "logging",
-            "name": "RemoteLog",
-            "class": "LogMessage",
-            "topic": "/RemoteLog",
-            "QoS": 10
-          }
-        }
-      ]
+    "Logger_Config": {
+      "log_level": "DEBUG",
+      "logger_type": "redis",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "terminal": {},
+      "file": { "filename": "MAPLE.log" },
+      "mqtt": { "broker": "localhost", "port": 1883, "topic": "logs" },
+      "redis": { "host": "localhost", "port": 6379, "channel": "logs" }
     },
     "knowledgeIn": { "properties": null },
     "knowledgeOut": {
@@ -53,17 +49,18 @@
         }
       ]
     },
-    "mqtt_broker": "localhost",
-    "mqtt_port": 1883,
-    "mqtt_subscribe_topics": ["/Scan"],
-    "mqtt_publish_topics": ["new_data"],
-    "redis_host": "localhost",
-    "redis_port": 6379,
-    "logging": {
-      "level": "DEBUG",
-      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-      "file": "MAPE_test.log"
+    "Event_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
     },
+
+    "Message_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
+    },
+
     "Knowledge_Config": {
       "knowledge_type": "redis",
       "host": "localhost",
@@ -72,18 +69,14 @@
     }
   },
   "Analysis_Config": {
-    "logger": {
-      "endpoints": [
-        {
-          "endpoint": {
-            "type": "logging",
-            "name": "RemoteLog",
-            "class": "LogMessage",
-            "topic": "/RemoteLog",
-            "QoS": 10
-          }
-        }
-      ]
+    "Logger_Config": {
+      "log_level": "DEBUG",
+      "logger_type": "redis",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "terminal": {},
+      "file": { "filename": "MAPLE.log" },
+      "mqtt": { "broker": "localhost", "port": 1883, "topic": "logs" },
+      "redis": { "host": "localhost", "port": 6379, "channel": "logs" }
     },
     "knowledgeIn": {
       "properties": [
@@ -125,17 +118,18 @@
         }
       ]
     },
-    "mqtt_broker": "localhost",
-    "mqtt_port": 1883,
-    "mqtt_subscribe_topics": ["new_data"],
-    "mqtt_publish_topics": ["anomaly"],
-    "redis_host": "localhost",
-    "redis_port": 6379,
-    "logging": {
-      "level": "DEBUG",
-      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-      "file": "MAPE_test.log"
+    "Event_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
     },
+
+    "Message_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
+    },
+
     "Knowledge_Config": {
       "knowledge_type": "redis",
       "host": "localhost",
@@ -144,18 +138,14 @@
     }
   },
   "Plan_Config": {
-    "logger": {
-      "endpoints": [
-        {
-          "endpoint": {
-            "type": "logging",
-            "name": "RemoteLog",
-            "class": "LogMessage",
-            "topic": "/RemoteLog",
-            "QoS": 10
-          }
-        }
-      ]
+    "Logger_Config": {
+      "log_level": "DEBUG",
+      "logger_type": "redis",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "terminal": {},
+      "file": { "filename": "MAPLE.log" },
+      "mqtt": { "broker": "localhost", "port": 1883, "topic": "logs" },
+      "redis": { "host": "localhost", "port": 6379, "channel": "logs" }
     },
     "knowledgeIn": { "properties": null },
     "knowledgeOut": {
@@ -215,17 +205,18 @@
         }
       ]
     },
-    "mqtt_broker": "localhost",
-    "mqtt_port": 1883,
-    "mqtt_subscribe_topics": ["anomaly"],
-    "mqtt_publish_topics": ["new_plan"],
-    "redis_host": "localhost",
-    "redis_port": 6379,
-    "logging": {
-      "level": "DEBUG",
-      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-      "file": "MAPE_test.log"
+    "Event_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
     },
+
+    "Message_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
+    },
+
     "Knowledge_Config": {
       "knowledge_type": "redis",
       "host": "localhost",
@@ -234,18 +225,14 @@
     }
   },
   "Execute_Config": {
-    "logger": {
-      "endpoints": [
-        {
-          "endpoint": {
-            "type": "logging",
-            "name": "RemoteLog",
-            "class": "LogMessage",
-            "topic": "/RemoteLog",
-            "QoS": 10
-          }
-        }
-      ]
+    "Logger_Config": {
+      "log_level": "DEBUG",
+      "logger_type": "redis",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "terminal": {},
+      "file": { "filename": "MAPLE.log" },
+      "mqtt": { "broker": "localhost", "port": 1883, "topic": "logs" },
+      "redis": { "host": "localhost", "port": 6379, "channel": "logs" }
     },
     "knowledgeIn": {
       "properties": [
@@ -317,17 +304,18 @@
         }
       ]
     },
-    "mqtt_broker": "localhost",
-    "mqtt_port": 1883,
-    "mqtt_subscribe_topics": ["new_plan"],
-    "mqtt_publish_topics": ["/spin_config"],
-    "redis_host": "localhost",
-    "redis_port": 6379,
-    "logging": {
-      "level": "DEBUG",
-      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-      "file": "MAPE_test.log"
+    "Event_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
     },
+
+    "Message_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
+    },
+
     "Knowledge_Config": {
       "knowledge_type": "redis",
       "host": "localhost",
@@ -336,18 +324,14 @@
     }
   },
   "Legitimate_Config": {
-    "logger": {
-      "endpoints": [
-        {
-          "endpoint": {
-            "type": "logging",
-            "name": "RemoteLog",
-            "class": "LogMessage",
-            "topic": "/RemoteLog",
-            "QoS": 10
-          }
-        }
-      ]
+    "Logger_Config": {
+      "log_level": "DEBUG",
+      "logger_type": "redis",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "terminal": {},
+      "file": { "filename": "MAPLE.log" },
+      "mqtt": { "broker": "localhost", "port": 1883, "topic": "logs" },
+      "redis": { "host": "localhost", "port": 6379, "channel": "logs" }
     },
     "knowledgeIn": { "properties": null },
     "knowledgeOut": { "properties": null },
@@ -377,17 +361,18 @@
         }
       ]
     },
-    "mqtt_broker": "localhost",
-    "mqtt_port": 1883,
-    "mqtt_subscribe_topics": ["/Scan"],
-    "mqtt_publish_topics": ["monitor/event"],
-    "redis_host": "localhost",
-    "redis_port": 6379,
-    "logging": {
-      "level": "DEBUG",
-      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-      "file": "MAPE_test.log"
+    "Event_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
     },
+
+    "Message_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
+    },
+
     "Knowledge_Config": {
       "knowledge_type": "redis",
       "host": "localhost",
@@ -396,18 +381,14 @@
     }
   },
   "Trustworthiness_Config": {
-    "logger": {
-      "endpoints": [
-        {
-          "endpoint": {
-            "type": "logging",
-            "name": "RemoteLog",
-            "class": "LogMessage",
-            "topic": "/RemoteLog",
-            "QoS": 10
-          }
-        }
-      ]
+    "Logger_Config": {
+      "log_level": "DEBUG",
+      "logger_type": "redis",
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+      "terminal": {},
+      "file": { "filename": "MAPLE.log" },
+      "mqtt": { "broker": "localhost", "port": 1883, "topic": "logs" },
+      "redis": { "host": "localhost", "port": 6379, "channel": "logs" }
     },
     "knowledgeIn": { "properties": null },
     "knowledgeOut": {
@@ -494,17 +475,18 @@
         }
       ]
     },
-    "mqtt_broker": "localhost",
-    "mqtt_port": 1883,
-    "mqtt_subscribe_topics": ["anomaly"],
-    "mqtt_publish_topics": ["new_plan"],
-    "redis_host": "localhost",
-    "redis_port": 6379,
-    "logging": {
-      "level": "DEBUG",
-      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-      "file": "MAPE_test.log"
+    "Event_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
     },
+
+    "Message_Manager_Config": {
+      "protocol": "redis",
+      "host": "localhost",
+      "port": 6379
+    },
+
     "Knowledge_Config": {
       "knowledge_type": "redis",
       "host": "localhost",
