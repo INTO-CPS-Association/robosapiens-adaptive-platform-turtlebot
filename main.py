@@ -7,13 +7,25 @@ from Nodes.Execute.Execute import Execute
 import time
 
 from Nodes.Trustworthiness.Trustworthiness import Trustworthiness
+import json
+# try:
+with open('config.json', 'r') as file:
+    config = json.load(file)
+# except:
+#     raise Exception("Config file not found")
 
-monitor = Monitor("Nodes/Monitor/config.yaml")
-analyse = Analysis("Nodes/Analysis/config.yaml")
-plan = Plan("Nodes/Plan/config.yaml")
-execute = Execute("Nodes/Execute/config.yaml")
-legitimate = Legitimate("Nodes/Legitimate/config.yaml")
-trust_c = Trustworthiness("Nodes/Trustworthiness/config.yaml")
+monitor = Monitor(config['Monitor_Config'])
+analyse = Analysis(config['Analysis_Config'])
+plan = Plan(config['Plan_Config'])
+execute = Execute(config['Execute_Config'])
+legitimate = Legitimate(config['Legitimate_Config'])
+trust_c = Trustworthiness(config['Trustworthiness_Config'])
+
+# analyse = Analysis("Nodes/Analysis/config.yaml")
+# plan = Plan("Nodes/Plan/config.yaml")
+# execute = Execute("Nodes/Execute/config.yaml")
+# legitimate = Legitimate("Nodes/Legitimate/config.yaml")
+# trust_c = Trustworthiness("Nodes/Trustworthiness/config.yaml")
 
 monitor.register_callbacks()
 analyse.register_callbacks()

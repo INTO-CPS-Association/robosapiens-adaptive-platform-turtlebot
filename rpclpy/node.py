@@ -7,7 +7,8 @@ import json
 
 class Node:
     def __init__(self, config, verbose = False):
-        self.config = self.load_config(config)
+        # self.config = self.load_config(config)
+        self.config = config
         self.logger = self._initialize_logger()
 
         # 'memcached': {"host": "127.0.0.1", "port": 11211},
@@ -57,15 +58,8 @@ class Node:
 
     def _initialize_knowledge(self):
         """Initialize the Knowledge object based on the config."""
-        # self.logger.info(f"Initializing Knowledge: {self.config['knowledge_config']['storage_type']} knowledge")
-        knowledge_config = {
-            'knowledge_type': 'redis',
-            'host': 'localhost',
-            'port': 6379,
-            'db': 0
-        }
-        return KnowledgeManager(knowledge_config)
-        # return KnowledgeManager(self.config['knowledge_config'])
+        self.logger.info(f"Initializing Knowledge: {self.config['Knowledge_Config']['knowledge_type']} knowledge")
+        return KnowledgeManager(self.config['Knowledge_Config'])
 
     def _initialize_communication_manager(self):
         """Initialize the Event Manager based on the config."""
