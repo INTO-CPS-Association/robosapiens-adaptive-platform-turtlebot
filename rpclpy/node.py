@@ -1,6 +1,8 @@
 import yaml
 import logging
 import json
+import uuid
+from datetime import datetime
 from rpclpy.CommunicationManager import CommunicationManager
 from rpclpy.KnowledgeManager import KnowledgeManager
 from rpclpy.LoggingAndTracking import LoggingAndTrackingHandler
@@ -108,11 +110,25 @@ class Node:
             self.event_manager.stop()
         if self.message_manager:
             self.message_manager.stop()
+            
 
     def publish_event(self, event_key, message=DEFAULT_EVENT_MESSAGE):
         """Publish Event using the Event manager."""
+        # Generate a unique ID for the message
+        message_id = str(uuid.uuid4().hex[:8])
+        # Get the current timestamp in ISO 8601 format
+        timestamp = datetime.now().isoformat()
+
+
+        message_payload = {
+        "uid": message_id,
+        "timestamp": timestamp,
+        "message": message
+        }
+
+    
         if self.event_manager:
-            self.event_manager.publish(event_key, message)
+            self.event_manager.publish(event_key, json.dumps(message_payload))
         else:
             self.logger.warning(WARN_EVENT_MANAGER_NOT_SET)
 
