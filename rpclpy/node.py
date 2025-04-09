@@ -21,7 +21,7 @@ KEY_PROTOCOL = "protocol"
 # ---------------------------------------------------------------------------
 # Default Values and Messages
 # ---------------------------------------------------------------------------
-DEFAULT_EVENT_MESSAGE = "True"
+DEFAULT_EVENT_MESSAGE = {}
 ENCODING_UTF8 = "utf-8"
 
 WARN_EVENT_MANAGER_NOT_SET = "Event manager is not set for Event publishing."
@@ -118,15 +118,12 @@ class Node:
         message_id = str(uuid.uuid4().hex[:8])
         # Get the current timestamp in ISO 8601 format
         timestamp = datetime.now().isoformat()
-
-        message_payload = {
-        "uid": message_id,
-        "timestamp": timestamp,
-        "message": message
-        }
+        
+        message['uid'] = message_id
+        message['timestamp'] = timestamp
     
         if self.event_manager:
-            self.event_manager.publish(event_key, json.dumps(message_payload))
+            self.event_manager.publish(event_key,  json.dumps(message))
         else:
             self.logger.warning(WARN_EVENT_MANAGER_NOT_SET)
 

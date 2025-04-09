@@ -34,16 +34,16 @@ class Trustworthiness(Node):
 
     # -----------------------------AUTO-GEN SKELETON FOR planner-----------------------------
     def t_a(self,msg):
-        self.publish_event("stage", json.dumps({'Str':'m'}))
+        self.publish_event("stage", {'Str':'m'})
         time.sleep(0.1)
-        self.publish_event("stage", json.dumps({'Str': 'a'}))
+        self.publish_event("stage", {'Str': 'a'})
 
     def t_p(self, msg):
-        self.publish_event("stage", json.dumps({'Str': 'p'}))
+        self.publish_event("stage", {'Str': 'p'})
     def t_l(self, msg):
-        self.publish_event("stage", json.dumps({'Str': 'l'}))
+        self.publish_event("stage", {'Str': 'l'})
     def t_e(self, msg):
-        self.publish_event("stage", json.dumps({'Str': 'e'}))
+        self.publish_event("stage", {'Str': 'e'})
 
     def trust_check(self, msg):
         self.logger.info(msg)

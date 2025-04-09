@@ -5,12 +5,14 @@ from Nodes.Analysis.Analysis import Analysis
 from Nodes.Plan.Plan import Plan
 from Nodes.Execute.Execute import Execute
 import time
+import yaml
 
 from Nodes.Trustworthiness.Trustworthiness import Trustworthiness
 import json
 try:
     with open('config.json', 'r') as file:
         config = json.load(file)
+    #    config = yaml.safe_load(file)
 except:
     raise Exception("Config file not found")
 

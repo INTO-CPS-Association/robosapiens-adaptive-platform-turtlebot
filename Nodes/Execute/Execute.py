@@ -43,7 +43,7 @@ class Execute(Node):
             self.logger.info("Executing")
             time.sleep(0.1)
         self.logger.info(f"Executed with directions = {directions}");
-        self.publish_event(event_key='/spin_config',message=json.dumps(directions))    # LINK <outport> spin_config
+        self.publish_event(event_key='/spin_config',message=directions)    # LINK <outport> spin_config
         self.write_knowledge("handling_anomaly", 0)
         #<!-- cc_code_executer END--!>
 
