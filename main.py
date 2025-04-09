@@ -8,11 +8,11 @@ import time
 
 from Nodes.Trustworthiness.Trustworthiness import Trustworthiness
 import json
-# try:
-with open('config.json', 'r') as file:
-    config = json.load(file)
-# except:
-#     raise Exception("Config file not found")
+try:
+    with open('config.json', 'r') as file:
+        config = json.load(file)
+except:
+    raise Exception("Config file not found")
 
 monitor = Monitor(config['Monitor_Config'])
 analyse = Analysis(config['Analysis_Config'])

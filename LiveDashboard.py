@@ -11,6 +11,7 @@ import base64
 import io
 from PIL import Image, ImageDraw
 import time
+import redis
 
 # Path to the log file
 LOG_FILE = 'MAPE_test.log'
@@ -20,36 +21,66 @@ phases = []
 
 # Extract and parse log lines in real-time
 def parse_log():
-    with open(LOG_FILE, 'r') as f:
-        f.seek(0, 2)  # Go to the end of the file
-        while True:
-            line = f.readline()
-            if line:
-                timestamp_match = re.match(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d+)", line)
-                monitor_match = re.search(r"Monitor.*INFO - (.*?)", line)
-                analysis_match = re.search(r"Analysis.*INFO - (.*?)", line)
-                plan_match = re.search(r"Plan.*INFO - (.*?)", line)
-                execute_match = re.search(r"Execute.*INFO - (.*?)", line)
-                legitimate_match = re.search(r"Legitimate.*INFO - (.*?)", line)  # Placeholder
-                trustworthiness_match = re.search(r"Trustworthiness.*INFO - (.*?)", line)  # Placeholder
-                mask_match = re.search(r"Analysis.*INFO - (.*?)", line)
+    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    pubsub = r.pubsub()
+    pubsub.subscribe('logs')
 
-                if timestamp_match:
-                    timestamp = datetime.strptime(timestamp_match.group(1), "%Y-%m-%d %H:%M:%S,%f")
-                    if monitor_match:
-                        phases.append(("Monitor", timestamp))
-                    elif analysis_match:
-                        phases.append(("Analysis", timestamp))
-                    elif plan_match:
-                        phases.append(("Plan", timestamp))
-                    elif execute_match:
-                        phases.append(("Execute", timestamp))
-                    elif legitimate_match:
-                        phases.append(("Legitimate", timestamp))
-                    elif trustworthiness_match:
-                        phases.append(("Trustworthiness", timestamp))
-            else:
-                time.sleep(0.5)
+    for message in pubsub.listen():
+        if message['type'] == 'message':
+            line = message['data'].decode('utf-8')
+            timestamp_match = re.match(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d+)", line)
+            monitor_match = re.search(r"Monitor.*INFO - (.*?)", line)
+            analysis_match = re.search(r"Analysis.*INFO - (.*?)", line)
+            plan_match = re.search(r"Plan.*INFO - (.*?)", line)
+            execute_match = re.search(r"Execute.*INFO - (.*?)", line)
+            legitimate_match = re.search(r"Legitimate.*INFO - (.*?)", line)
+            trustworthiness_match = re.search(r"Trustworthiness.*INFO - (.*?)", line)
+
+            if timestamp_match:
+                timestamp = datetime.strptime(timestamp_match.group(1), "%Y-%m-%d %H:%M:%S,%f")
+                if monitor_match:
+                    phases.append(("Monitor", timestamp))
+                elif analysis_match:
+                    phases.append(("Analysis", timestamp))
+                elif plan_match:
+                    phases.append(("Plan", timestamp))
+                elif execute_match:
+                    phases.append(("Execute", timestamp))
+                elif legitimate_match:
+                    phases.append(("Legitimate", timestamp))
+                elif trustworthiness_match:
+                    phases.append(("Trustworthiness", timestamp))
+# def parse_log():
+#     with open(LOG_FILE, 'r') as f:
+#         f.seek(0, 2)  # Go to the end of the file
+#         while True:
+#             line = f.readline()
+#             if line:
+#                 timestamp_match = re.match(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d+)", line)
+#                 monitor_match = re.search(r"Monitor.*INFO - (.*?)", line)
+#                 analysis_match = re.search(r"Analysis.*INFO - (.*?)", line)
+#                 plan_match = re.search(r"Plan.*INFO - (.*?)", line)
+#                 execute_match = re.search(r"Execute.*INFO - (.*?)", line)
+#                 legitimate_match = re.search(r"Legitimate.*INFO - (.*?)", line)  # Placeholder
+#                 trustworthiness_match = re.search(r"Trustworthiness.*INFO - (.*?)", line)  # Placeholder
+#                 mask_match = re.search(r"Analysis.*INFO - (.*?)", line)
+
+#                 if timestamp_match:
+#                     timestamp = datetime.strptime(timestamp_match.group(1), "%Y-%m-%d %H:%M:%S,%f")
+#                     if monitor_match:
+#                         phases.append(("Monitor", timestamp))
+#                     elif analysis_match:
+#                         phases.append(("Analysis", timestamp))
+#                     elif plan_match:
+#                         phases.append(("Plan", timestamp))
+#                     elif execute_match:
+#                         phases.append(("Execute", timestamp))
+#                     elif legitimate_match:
+#                         phases.append(("Legitimate", timestamp))
+#                     elif trustworthiness_match:
+#                         phases.append(("Trustworthiness", timestamp))
+#             else:
+#                 time.sleep(0.5)
 
 
 

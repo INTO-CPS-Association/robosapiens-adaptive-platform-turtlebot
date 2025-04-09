@@ -119,13 +119,11 @@ class Node:
         # Get the current timestamp in ISO 8601 format
         timestamp = datetime.now().isoformat()
 
-
         message_payload = {
         "uid": message_id,
         "timestamp": timestamp,
         "message": message
         }
-
     
         if self.event_manager:
             self.event_manager.publish(event_key, json.dumps(message_payload))
