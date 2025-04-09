@@ -179,8 +179,11 @@ def on_message(message):
         if payload.get("commands") :
             plan = payload.get("commands")[0]
             duration = plan.get("duration")
-            sim.angle = plan.get("omega", 90)
-            sim.standard_navigation = False
+            if duration == 0.0:
+                sim.standard_navigation = True
+            else:
+                sim.standard_navigation = False
+                sim.angle = plan.get("omega", 90)
             # threading.Thread(target=sim.spin, args=(duration, angle)).start()
             update_map()
     except json.JSONDecodeError:
