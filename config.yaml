@@ -41,13 +41,13 @@ Monitor_Config:
           topic: /new_data
           QoS: 10
   Event_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Message_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Knowledge_Config:
     knowledge_type: redis
     host: localhost
@@ -97,13 +97,13 @@ Analysis_Config:
           topic: /anomaly
           QoS: 10
   Event_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Message_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Knowledge_Config:
     knowledge_type: redis
     host: localhost
@@ -165,13 +165,13 @@ Plan_Config:
           topic: /new_plan
           QoS: 10
   Event_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Message_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Knowledge_Config:
     knowledge_type: redis
     host: localhost
@@ -239,13 +239,13 @@ Execute_Config:
           topic: /spin_config
           QoS: 10
   Event_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Message_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Knowledge_Config:
     knowledge_type: redis
     host: localhost
@@ -289,13 +289,13 @@ Legitimate_Config:
           topic: /isLegit
           QoS: 10
   Event_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Message_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Knowledge_Config:
     knowledge_type: redis
     host: localhost
@@ -375,13 +375,13 @@ Trustworthiness_Config:
           topic: /stage
           QoS: 10
   Event_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Message_Manager_Config:
-    protocol: redis
-    host: localhost
-    port: 6379
+    protocol: mqtt
+    broker: localhost
+    port: 1883
   Knowledge_Config:
     knowledge_type: redis
     host: localhost

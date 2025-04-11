@@ -209,9 +209,9 @@ def periodic_update():
 
 
 if __name__ == "__main__":
-    # client = CommunicationManager("mqtt", {"broker": "localhost", "port": 1883})
+    client = CommunicationManager({"protocol":"mqtt", "broker": "localhost", "port": 1883})
     # client = communication_manager = CommunicationManager("rabbitmq", {"host": "localhost", "port": 5672})
-    client = CommunicationManager({"protocol":"redis", "host": "localhost", "port": 6379})
+    # client = CommunicationManager({"protocol":"redis", "host": "localhost", "port": 6379})
     client.subscribe(SPIN_CONFIG_TOPIC, callback=on_message)
     # client.on_message = on_message
     client.start()
