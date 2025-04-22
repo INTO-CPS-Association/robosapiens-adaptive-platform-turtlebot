@@ -56,10 +56,10 @@ class Direction(object):
         self._duration = cmp
 
 
-class AnomalyMessage(object):
+class AnomalyEvent(object):
     def __init__(self):
 
-        self.name= "AnomalyMessage"
+        self.name= "AnomalyEvent"
         self._anomaly= None
 
 
@@ -74,10 +74,10 @@ class AnomalyMessage(object):
         self._anomaly = cmp
 
 
-class NewPlanMessage(object):
+class NewPlanEvent(object):
     def __init__(self):
 
-        self.name= "NewPlanMessage"
+        self.name= "NewPlanEvent"
         self._NewPlan= None
 
 
