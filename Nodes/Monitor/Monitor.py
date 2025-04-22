@@ -10,11 +10,39 @@ from rpclpy.node import Node
 from .messages import *
 import time
 #<!-- cc_include START--!>
-# user includes here
+import json
 #<!-- cc_include END--!>
 
 #<!-- cc_code START--!>
-# user code here
+def json_to_object(json_data, cls):
+    """
+    Fills and returns an instance of `cls` using the JSON data provided.
+    
+    Args:
+        json_data (str or dict): JSON string or parsed dict.
+        cls (type): The class to instantiate and fill.
+        
+    Returns:
+        An instance of `cls` with attributes from JSON.
+    """
+    # Parse JSON if it's a string
+    if isinstance(json_data, str):
+        json_data = json.loads(json_data)
+    
+    # Extract matching arguments based on class __init__
+    try:
+        obj = cls(**json_data)
+    except TypeError:
+        # Fallback: create empty object and manually set attributes
+        obj = cls.__new__(cls)
+        for key, value in json_data.items():
+            setattr(obj, key, value)
+        if hasattr(obj, '__init__'):
+            try:
+                obj.__init__()
+            except TypeError:
+                pass  # if __init__ expects parameters we skip calling it
+    return obj
 #<!-- cc_code END--!>
 
 class Monitor(Node):

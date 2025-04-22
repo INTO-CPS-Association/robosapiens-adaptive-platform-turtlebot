@@ -2,6 +2,7 @@ import yaml
 import logging
 import json
 import uuid
+import pickle
 from datetime import datetime
 from rpclpy.CommunicationManager import CommunicationManager
 from rpclpy.KnowledgeManager import KnowledgeManager
@@ -161,26 +162,55 @@ class Node:
 
     def read_knowledge(self, key, queueSize=1):
         """Read a value from the Knowledge Manager."""
-        value = self.knowledge.read(key, queueSize)
-        if value is not None:
-            value = value.decode(ENCODING_UTF8)  # Convert bytes to string
-            try:
-                value = json.loads(value)  # Try to deserialize the value if it's a JSON string
-            except json.JSONDecodeError:
-                pass  # If it's not JSON, return it as a string
-        return value
+        if isinstance(key, str):
+            value = self.knowledge.read(key, queueSize)
+            if value is not None:
+                value = value.decode(ENCODING_UTF8)  # Convert bytes to string
+                try:
+                    value = json.loads(value)  # Try to deserialize the value if it's a JSON string
+                except json.JSONDecodeError:
+                    pass  # If it's not JSON, return it as a string
+            
+            return value
+        else:
+            return self.read_knowledge_as_object(key)
+    
+    def read_knowledge_as_object(self, cls):
+        _cls = cls()
+        value = self.knowledge.read(_cls.name)
+        # if isinstance(value, str):
+        #     value = json.loads(value)
+        #     # Extract matching arguments based on class __init__
+        # try:
+        #     obj = cls(**value)
+        # except TypeError:
+        #     # Fallback: create empty object and manually set attributes
+        #     obj = cls.__new__(cls)
 
-    def write_knowledge(self, key, value):
+        #     for key, value in value.items():
+        #         setattr(obj, key, value)
+        #     if hasattr(obj, '__init__'):
+        #         try:
+        #             obj.__init__()
+        #         except TypeError:
+        #             pass  # if __init__ expects parameters we skip calling it
+        # return obj
+        return pickle.loads(value)
+
+    def write_knowledge(self, key, value = None):
         """Write a value to the Knowledge Manager."""
         if isinstance(key, str):
             if isinstance(value, str):
                 value = str(value)
             return self.knowledge.write(key, value)
         else:
-            # Convert the class instance to a dictionary
-            class_dict = {}
-            for key_attr, attr_value in key.__dict__.items():
-                public_key = key_attr.lstrip('_')
-                class_dict[public_key] = attr_value
-            value = json.dumps(class_dict)  # Serialize the dictionary to a JSON string
-            return self.knowledge.write(key.name, value)
+            return self.write_knowledge_as_object(key)
+        
+    def write_knowledge_as_object(self, cls):
+        # """Write a class instance to the Knowledge Manager."""
+        # value = json.dumps(cls.__dict__)
+        cls.uid = str(uuid.uuid4().hex[:8])
+        cls.timestamp = datetime.now().isoformat()
+        value = pickle.dumps(cls)
+        return self.knowledge.write(cls.name, value)
+

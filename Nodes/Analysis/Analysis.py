@@ -52,6 +52,8 @@ class Analysis(Node):
         #<!-- cc_init START--!>
         self._scans = []
         self.anomaly = False
+        self.handling_anomaly = HandlingAnomalyData()
+        self.write_knowledge(self.handling_anomaly)
 
         def scans():
             while True:
@@ -73,6 +75,9 @@ class Analysis(Node):
     # -----------------------------AUTO-GEN SKELETON FOR analyse_scan_data-----------------------------
     def analyse_scan_data(self,msg):
         laser_scan = self.read_knowledge("laser_scan",queueSize=1)
+        laser_scan_cls = self.read_knowledge(LaserScan)
+        
+
 
         #<!-- cc_code_analyse_scan_data START--!>
 
@@ -107,10 +112,11 @@ class Analysis(Node):
         # Add the next sliding boolean lidar mask to the knowledge base
         self.logger.info(f" - Lidar mask: {lidar_mask}")
         serialized_lidar_mask = lidar_mask.to_json()
-
+        # todo: use classes to read/write knowledge
         self.write_knowledge("lidar_mask", serialized_lidar_mask)
 
-        handling_anomaly = self.read_knowledge("handling_anomaly")
+        handling_anomaly= self.read_knowledge(HandlingAnomalyData)._anomaly
+        # handling_anomaly= self.read_knowledge("handling_anomaly",queueSize=1)
 
         # We should not try and handle two anomalies at once!
         if handling_anomaly:
