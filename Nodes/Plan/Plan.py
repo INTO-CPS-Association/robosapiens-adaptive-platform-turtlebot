@@ -99,27 +99,17 @@ class Plan(Node):
 
     # -----------------------------AUTO-GEN SKELETON FOR planner-----------------------------
     def planner(self,msg):
-        _NewPlanMessage = NewPlanMessage()
         _Direction = Direction()
 
         #<!-- cc_code_planner START--!>
 
         # user code here for planner
 
-        _NewPlanMessage._NewPlan= "SET VALUE"    # datatype: Boolean
         _Direction._omega= "SET VALUE"    # datatype: Float_64
         _Direction._duration= "SET VALUE"    # datatype: Float_64
 
         self.logger.debug(f"Plan generating: {msg}")
-        # Simulate planning logic based on analysis
-        # pickled_lidar_mask = self.knowledge.read("lidar_mask")
-        # lidar_mask = pickle.load(self.knowledge.read("lidar_mask"))
 
-        #this part of code must be placed in analyse but I cannot retrieve lidar_mask for now
-        # TODO: the knowledge manager attempts to deserialize this incorrectly;
-        # we need support for custom deserialization, so for now we manually
-        # retrieve the key from Redis
-        # lidar_data = json.dumps(self.knowledge.read("laser_scan"))
         lidar_data = self.knowledge.read('lidar_mask')
         if lidar_data is None:
             raise Exception("No lidar mask available in knowledge mask")
@@ -152,7 +142,7 @@ class Plan(Node):
             for i in range(10):
                 self.logger.info("Planning")
                 time.sleep(0.1)
-            self.publish_event("new_plan")
+            self.publish_event(NewPlan)
             self.write_knowledge("directions", json.dumps({'commands': directions, 'period': 8}))
             self.logger.info(f"Stored planned action: {directions}")
         #<!-- cc_code_planner END--!>

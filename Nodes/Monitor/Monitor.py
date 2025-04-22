@@ -37,14 +37,18 @@ class Monitor(Node):
 
         # user code here for monitor_data
 
-        _LaserScan._ranges= "SET VALUE"    # datatype: Array
-        _LaserScan._angle_increment= "SET VALUE"    # datatype: Float_64
+        _laser_scan = json_to_object(msg, LaserScan)
+        json_message = json.loads(msg)
+        _laser_scan._ranges = json_message['ranges']
 
         #<!-- cc_code_monitor_data END--!>
 
         # _success = self.knowledge.write(cls=_LaserScan)
         self.write_knowledge("laser_scan",msg)
-        self.publish_event(event_key='new_data')    # LINK <outport> new_data
+        #use the bellew
+        self.write_knowledge(_laser_scan)
+        
+        self.publish_event(NewData)
 
     def register_callbacks(self):
         self.register_event_callback(event_key='/Scan', callback=self.monitor_data)     # LINK <eventTrigger> Scan

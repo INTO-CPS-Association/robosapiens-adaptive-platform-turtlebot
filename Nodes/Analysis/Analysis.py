@@ -130,8 +130,10 @@ class Analysis(Node):
         # occlusion outside of the ignored region
         self.logger.info(f"planned_lidar_mask = {planned_lidar_mask}")
         if lidar_mask.dist(planned_lidar_mask) > REPLANNING_SENSITIVITY:
-            self.write_knowledge("handling_anomaly", 1)
-            self.publish_event(event_key='anomaly')
+            
+            self.handling_anomaly._anomaly = True            
+            self.write_knowledge(self.handling_anomaly)
+            self.publish_event(AnomalyDetected)
             self.logger.info(f"Anomaly: True")
         else:
             self.logger.info(f"Anomaly: False")

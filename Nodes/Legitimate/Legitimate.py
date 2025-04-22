@@ -30,7 +30,6 @@ class Legitimate(Node):
         #<!-- cc_init END--!>
     # -----------------------------AUTO-GEN SKELETON FOR executer-----------------------------
     def legitimate(self,msg):
-        isLegit = self.read_knowledge("isLegit",queueSize=1)
         directions = self.read_knowledge("directions",queueSize=1)
         _Direction = Direction()
 
@@ -43,7 +42,7 @@ class Legitimate(Node):
         for i in range(5):
             self.logger.info("Legitimating")
             time.sleep(0.1)
-        self.publish_event(event_key='isLegit')    # LINK <outport> spin_config
+        self.publish_event(PlanisLegit)    # LINK <outport> spin_config
 
     def register_callbacks(self):
         self.register_event_callback(event_key='new_plan', callback=self.legitimate)        # LINK <inport> new_plan

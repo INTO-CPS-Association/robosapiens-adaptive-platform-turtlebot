@@ -26,6 +26,7 @@ class Execute(Node):
 
         self._name = "Execute"
         self.logger.info("Execute instantiated")
+        self.handling_anomaly = HandlingAnomalyData()
 
         #<!-- cc_init START--!>
         # user includes here
@@ -44,7 +45,8 @@ class Execute(Node):
             time.sleep(0.1)
         self.logger.info(f"Executed with directions = {directions}");
         self.publish_event(event_key='/spin_config',message=directions)    # LINK <outport> spin_config
-        self.write_knowledge("handling_anomaly", 0)
+        self.handling_anomaly._anomaly = False
+        self.write_knowledge(self.handling_anomaly)
         #<!-- cc_code_executer END--!>
 
     def register_callbacks(self):

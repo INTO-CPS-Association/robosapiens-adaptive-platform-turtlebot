@@ -114,18 +114,27 @@ class Node:
 
     def publish_event(self, event_key, message=DEFAULT_EVENT_MESSAGE):
         """Publish Event using the Event manager."""
-        # Generate a unique ID for the message
-        message_id = str(uuid.uuid4().hex[:8])
-        # Get the current timestamp in ISO 8601 format
-        timestamp = datetime.now().isoformat()
+        if isinstance(event_key, str):
+            # Generate a unique ID for the message
+            message_id = str(uuid.uuid4().hex[:8])
+            # Get the current timestamp in ISO 8601 format
+            timestamp = datetime.now().isoformat()
+            
+            message['uid'] = message_id
+            message['timestamp'] = timestamp
         
-        message['uid'] = message_id
-        message['timestamp'] = timestamp
-    
-        if self.event_manager:
-            self.event_manager.publish(event_key,  json.dumps(message))
-        else:
-            self.logger.warning(WARN_EVENT_MANAGER_NOT_SET)
+            if self.event_manager:
+                self.event_manager.publish(event_key,  json.dumps(message))
+            else:
+                self.logger.warning(WARN_EVENT_MANAGER_NOT_SET)
+        else: 
+            event_cls = event_key()
+            event_cls.uid = str(uuid.uuid4().hex[:8])
+            event_cls.timestamp = datetime.now().isoformat()
+            value = json.dumps(event_cls.__dict__)
+            self.event_manager.publish(event_cls.topic, value)
+
+
 
     def publish_message(self, event_key, message=DEFAULT_EVENT_MESSAGE):
         """Publish Event using the Event manager."""

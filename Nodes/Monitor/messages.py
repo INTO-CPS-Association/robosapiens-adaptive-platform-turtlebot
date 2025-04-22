@@ -1,7 +1,20 @@
+from enum import Enum
+
+class Type(Enum):
+    Event = 1
+    Knowledge = 2
+    Message = 3
+
+
 class LaserScan(object):
     def __init__(self):
 
         self.name= "LaserScan"
+        self.type = Type.Knowledge
+
+        self.uid= None
+        self.timestamp= None
+        self.topic= "/Scan"
         self._ranges= []
         self._angle_increment= 0.0
 
@@ -31,6 +44,11 @@ class Direction(object):
     def __init__(self):
 
         self.name= "Direction"
+        self.type = Type.Knowledge
+        self.uid= None
+        self.timestamp= None
+        self.topic= None
+
         self._omega= 0.0
         self._duration= 0.0
 
@@ -54,31 +72,30 @@ class Direction(object):
     def duration(self, cmp):
         """The duration (write)."""
         self._duration = cmp
+ 
 
-
-class AnomalyEvent(object):
     def __init__(self):
+        self.name= "NewData"
+        self.type = Type.Event 
+        self.uid= None
+        self.timestamp= None
+        self.topic= None
+        
+class NewData(object):
 
-        self.name= "AnomalyEvent"
-        self._anomaly= None
-
-
-    @property
-    def anomaly(self):
-        """The anomaly (read-only)."""
-        return self._anomaly
-
-    @anomaly.setter
-    def anomaly(self, cmp):
-        """The anomaly (write)."""
-        self._anomaly = cmp
-
-
-class NewPlanEvent(object):
     def __init__(self):
+        self.name= "NewData"
+        self.type = "event"
+        self.topic= "new_data"
+        self.timestamp= None
 
-        self.name= "NewPlanEvent"
-        self._NewPlan= None
+class NewPlan(object):
+    def __init__(self):
+        self.name= "NewPlan"
+        self.type = "event"
+        self.uid= None
+        self.timestamp= "new_plan"
+        self.topic= None
 
 
     @property
@@ -91,4 +108,33 @@ class NewPlanEvent(object):
         """The NewPlan (write)."""
         self._NewPlan = cmp
 
+class Anomaly(object):
+    def __init__(self):
+        self.name= "Anomaly"
+        self.type = Type.Event
+        self.uid= None
+        self.timestamp= None
+        self.topic= "anomaly"
 
+
+class isLegit(object):
+    def __init__(self):
+        self.name= "isLegit"
+        self.type = Type.Event
+        self.uid= None
+        self.timestamp= None
+        self.topic= "isLegit"
+
+class HandlingAnomalyData(object):
+    def __init__(self):
+
+        self.name= "HandlingAnomaly"
+        self.uid= None
+        self.timestamp= None
+        self._anomaly= False
+
+
+    @property
+    def HandlingAnomaly(self, cmp):
+        """The NewPlan (read-only)."""
+        self._anomaly = cmp
