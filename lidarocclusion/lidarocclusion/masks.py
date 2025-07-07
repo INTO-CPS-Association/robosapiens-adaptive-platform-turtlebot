@@ -11,7 +11,6 @@ D = TypeVar('D')
 K = TypeVar('K')
 E = TypeVar('E')
 
-from abc import ABCMeta
 import math
 import operator
 from functools import partial, reduce
@@ -31,7 +30,7 @@ class LidarMask(Generic[D]):
     _values: np.ndarray
     # Value in pi radians
     _base_angle: Fraction
-    
+
     def __init__(self, contents_spec,
                  base_angle : Optional[NumberSpec] = None):
         match base_angle:
@@ -83,14 +82,14 @@ class LidarMask(Generic[D]):
                         # A preformatted numpy array
                         case _:
                             self._values = np.array(contents_spec)
-        
+
         assert self._values.shape == (round(2/self._base_angle),)
 
     @property
     def angles(self) -> List[Fraction]:
         return [i*self.base_angle
                 for i in range(round(2/self.base_angle))]
-    
+
     @property
     def real_angles(self) -> List[float]:
         return [r*math.pi for r in self.angles]
@@ -100,13 +99,13 @@ class LidarMask(Generic[D]):
         return len(self._values)
 
     @classmethod
-    def total_mask(cls : Type[D],
+    def total_mask(cls,
                    value : D,
                    base_angle: Optional[NumberSpec] = None) -> D:
 
         return cls([((0, 2*math.pi), value)],
                    base_angle=base_angle) # type: ignore
-    
+
     @property
     def base_angle(self) -> Fraction:
         return self._base_angle
@@ -117,7 +116,7 @@ class LidarMask(Generic[D]):
             (portion.closedopen(i*self._base_angle, (i+1)*self._base_angle), k)
                 for i, k in enumerate(self._values)
         ])
-    
+
     @property
     def bool_mask(self) -> 'BoolLidarMask':
         return self.map_bool(lambda x: x != self.default_value)
@@ -125,12 +124,12 @@ class LidarMask(Generic[D]):
     @property
     def default_value(self) -> Optional[D]:
         return None
-    
+
     @property
     def int_dict_sorted(self) -> List[Tuple[portion.Interval, D]]:
         return list(sorted(self.int_dict.as_dict(atomic=True).items(),
                            key=lambda x: x[0].lower))
-    
+
     def map(self, f: Callable[[D], D]) -> 'LidarMask[D]':
         F = np.vectorize(f)
         return self.__class__(
@@ -150,7 +149,7 @@ class LidarMask(Generic[D]):
 
     def __repr__(self) -> str:
         return f'{self.__class__.__name__}({repr(self._values), self._base_angle})'
-    
+
     def __call__(self, t: float) -> D:
         t = t % (2*math.pi)
 
@@ -159,8 +158,8 @@ class LidarMask(Generic[D]):
                 return v
 
         raise ValueError(f'No value found for angle {t}')
-    
-    def __eq__(self, other) -> 'BoolLidarMask':
+
+    def __eq__(self, other) -> 'BoolLidarMask': # type: ignore
         match other:
             case LidarMask():
                 return self.zip_with(other, operator.eq) # type: ignore
@@ -173,7 +172,7 @@ class LidarMask(Generic[D]):
     def __le__(self, other : D) -> 'BoolLidarMask':
         # numpy-style pointwise comparisons
         return self.map_bool(partial(operator.ge, other)) # type: ignore
-    
+
     def __gt__(self, other : D) -> 'BoolLidarMask':
         # numpy-style pointwise comparisons
         return self.map_bool(partial(operator.lt, other)) # type: ignore
@@ -197,7 +196,7 @@ class LidarMask(Generic[D]):
             F(self._values, other._values),
             self.base_angle,
         )
-    
+
     def __add__(self, other: Union[D, 'LidarMask[D]']) -> 'LidarMask[D]':
         match other:
             case LidarMask():
@@ -291,7 +290,7 @@ class LidarMask(Generic[D]):
                 self._values *= other
 
         return self
-    
+
     def approx_eq(self, other):
         import pytest
 
@@ -314,7 +313,7 @@ class LidarMask(Generic[D]):
                 )
             case _:
                 raise ValueError(f'Invalid rotation parameter {param}')
-            
+
     def reduce_rotate(self,
                       f: 'Callable[[LidarMask[D], LidarMask[D]], LidarMask[D]]',
                       param: Fraction | int) -> 'LidarMask[D]':
@@ -325,11 +324,11 @@ class LidarMask(Generic[D]):
                 n = param
             case _:
                 raise ValueError(f'Invalid rotation parameter {param}')
-            
+
         rotations = ([self.rotate(i) for i in range(1,n+1)]
                      if n > 0
                      else [self.rotate(-i) for i in range(1,-n+1)])
-            
+
         return reduce(f, rotations, self)
 
 
@@ -352,9 +351,9 @@ class BoolLidarMask(LidarMask[bool]):
     @property
     def prob_mask(self) -> 'ProbLidarMask':
         return ProbLidarMask(self.map_poly(lambda x: 1.0 if x else 0.0))
-    
+
     def pie_plot(self, **kwargs):
-        slices = self.int_dict_sorted 
+        slices = self.int_dict_sorted
 
         fig = plt.figure(figsize=(2, 2))
         plt.pie(
@@ -366,7 +365,7 @@ class BoolLidarMask(LidarMask[bool]):
             counterclock=False,
         )
         return fig
-    
+
     def plot(self, **kwargs):
         x = self.real_angles
         y = (~self).prob_mask._values
@@ -376,7 +375,7 @@ class BoolLidarMask(LidarMask[bool]):
         plt.xlim(0, 2*math.pi)
         plt.xticks([i*math.pi / 4 for i in range(9)],
                    [r"$" + str(i) + r"\pi$/4" for i in range(9)])
-        plt.yticks([0, 1], [0, 1])
+        plt.yticks([0, 1], ["0", "1"])
         return fig
 
     def __and__(self, other: Union[bool, 'BoolLidarMask']) -> 'BoolLidarMask':
@@ -424,7 +423,7 @@ class BoolLidarMask(LidarMask[bool]):
 
     def strengthen(self, param: Fraction | int):
         return self.reduce_rotate(operator.and_, param)
-    
+
     def weaken(self, param: Fraction | int):
         return self.reduce_rotate(operator.or_, param)
 
@@ -437,9 +436,9 @@ class BoolLidarMask(LidarMask[bool]):
     @classmethod
     def from_json(cls: "type[BoolLidarMask]", s: str) -> "BoolLidarMask":
         data = json.loads(s)
-        base_angle = Fraction(*data['base_angle']) 
+        base_angle = Fraction(*data['base_angle'])
         values = np.array(data['values'])
-        
+
         return cls(
             values,
             base_angle
@@ -461,7 +460,7 @@ class ProbLidarMask(LidarMask[float]):
         return 0.0
 
     def pie_plot(self, **kwargs):
-        slices = self.int_dict_sorted 
+        slices = self.int_dict_sorted
 
         fig = plt.figure(figsize=(2, 2))
         plt.pie(
@@ -472,7 +471,7 @@ class ProbLidarMask(LidarMask[float]):
             counterclock=False,
         )
         return fig
-    
+
     def plot(self, **kwargs):
         x = self.real_angles
         y = self._values
@@ -482,5 +481,5 @@ class ProbLidarMask(LidarMask[float]):
         plt.xlim(0, 2*math.pi)
         plt.xticks([i*math.pi / 4 for i in range(9)],
                    [r"$" + str(i) + r"\pi$/4" for i in range(9)])
-        plt.yticks([0, 1], [0, 1])
+        plt.yticks([0, 1], ["0", "1"])
         return fig

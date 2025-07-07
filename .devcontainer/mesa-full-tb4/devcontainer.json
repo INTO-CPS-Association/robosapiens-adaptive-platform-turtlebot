@@ -10,7 +10,7 @@
   "mounts": [
     "source=${localWorkspaceFolder}/,target=/ws,type=bind,consistency=cached"
   ],
-  "postCreateCommand": "pip install -r requirements.txt",
+  "postCreateCommand": "/bin/bash -c \"uv venv && uv pip install --link-mode=copy -r requirements.txt\"",
   "containterUser": "devuser",
   "customizations": {
     "vscode": {

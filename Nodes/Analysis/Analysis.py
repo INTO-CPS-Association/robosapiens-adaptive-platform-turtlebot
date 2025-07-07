@@ -18,6 +18,7 @@ from typing import List, Tuple, Dict
 import traceback
 import numpy as np
 import pickle
+import portion
 from matplotlib import pyplot as plt
 #<!-- cc_include END--!>
 
@@ -76,7 +77,7 @@ class Analysis(Node):
     def analyse_scan_data(self,msg):
         laser_scan = self.read_knowledge("laser_scan",queueSize=1)
         laser_scan_cls = self.read_knowledge(LaserScan)
-        
+
 
 
         #<!-- cc_code_analyse_scan_data START--!>
@@ -136,8 +137,8 @@ class Analysis(Node):
         # occlusion outside of the ignored region
         self.logger.info(f"planned_lidar_mask = {planned_lidar_mask}")
         if lidar_mask.dist(planned_lidar_mask) > REPLANNING_SENSITIVITY:
-            
-            self.handling_anomaly._anomaly = True            
+
+            self.handling_anomaly._anomaly = True
             self.write_knowledge(self.handling_anomaly)
             self.publish_event(AnomalyDetected)
             self.logger.info(f"Anomaly: True")

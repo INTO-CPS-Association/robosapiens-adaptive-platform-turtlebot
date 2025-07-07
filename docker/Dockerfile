@@ -14,9 +14,10 @@ ARG GID=${UID}
 # Install basic apt packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git libcanberra-gtk-module libcanberra-gtk3-module fuse3 libfuse2 libqt5svg5-dev \
-    python3-pip python3-opencv python3-tk python3-pyqt5.qtwebengine mesa-utils\
+    python3-opencv python3-tk python3-pyqt5.qtwebengine mesa-utils\
     gdb gdbserver vim jupyter-notebook python3-jupyter-server sudo ssh zsh tmux\
-    neovim
+    neovim curl\
+    && rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
 RUN mkdir -p /ws/src
 WORKDIR /ws
@@ -46,4 +47,5 @@ COPY docker/entrypoint.sh /opt/entrypoint.sh
 ENTRYPOINT ["/opt/entrypoint.sh"]
 RUN echo "source /opt/entrypoint.sh" >> /root/.profile
 USER ${USERNAME}
+RUN curl -LsSf https://astral.sh/uv/0.7.19/install.sh | sh
 RUN echo "source /opt/entrypoint.sh" >> /home/${USERNAME}/.bashrc
