@@ -1,7 +1,7 @@
 # ROS distribution to use
 ARG ROS_DISTRO=humble
 
-FROM osrf/ros:${ROS_DISTRO}-desktop as base
+FROM osrf/ros:${ROS_DISTRO}-desktop AS base
 ENV ROS_DISTRO=${ROS_DISTRO}
 SHELL ["/bin/bash", "-c"]
 
@@ -18,7 +18,7 @@ RUN chmod a+rx /opt/entrypoint.sh\
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
 
-FROM base as dev
+FROM base AS dev
 
 # Dev container arguments
 ARG USERNAME=devuser
