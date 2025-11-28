@@ -4,7 +4,7 @@ ARG ROS_DISTRO=humble
 ########################################
 # Base Image for TurtleBot3 Simulation #
 ########################################
-FROM osrf/ros:${ROS_DISTRO}-desktop as base
+FROM osrf/ros:${ROS_DISTRO}-desktop AS base
 ENV ROS_DISTRO=${ROS_DISTRO}
 SHELL ["/bin/bash", "-c"]
 
@@ -33,7 +33,7 @@ RUN chmod a+rx /opt/entrypoint.sh\
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
 
-FROM base as dev
+FROM base AS dev
 
 # Dev container arguments
 ARG USERNAME=devuser
@@ -72,6 +72,8 @@ COPY docker/kernel.json /usr/share/jupyter/kernels/python3ros/kernel.json
 
 RUN apt update && apt install -y ros-humble-turtlebot3-gazebo ros-humble-turtlebot3-teleop
 
+COPY docker/fastdds_no_shared_memory.xml /opt/fastdds_no_shared_memory.xml
+
 RUN echo "source /opt/entrypoint.sh" >> /root/.profile
 USER ${USERNAME}
 RUN echo "source /opt/entrypoint.sh" >> /home/${USERNAME}/.bashrc
@@ -90,12 +92,13 @@ RUN source /opt/entrypoint.sh\
     && rosdep install -i --from-path spin_interfaces --rosdistro humble\
     && colcon build --packages-select spin_interfaces
 USER root
-RUN echo "source /opt/scan_relay_ws/install/setup.bash" >> "/opt/setup.bash"
+RUN printf "\nsource /opt/scan_relay_ws/install/setup.bash" >> "/opt/setup.bash"
 USER ${USERNAME}
 RUN source /opt/entrypoint.sh\
     && rosdep install -i --from-path demo_bringup --rosdistro humble\
     && rosdep install -i --from-path scan_modifier --rosdistro humble\
     && rosdep install -i --from-path spinning_controller --rosdistro humble\
-    && rosdep install -i --from-path topic_param_bridge --rosdistro humble
+    && rosdep install -i --from-path topic_param_bridge --rosdistro humble \
+    && rosdep install -i --from-path rviz_plugin --rosdistro humble 
 RUN source /opt/entrypoint.sh\
-    && colcon build --packages-select demo_bringup scan_modifier spinning_controller topic_param_bridge
+    && colcon build --packages-select demo_bringup scan_modifier spinning_controller topic_param_bridge rviz_plugin

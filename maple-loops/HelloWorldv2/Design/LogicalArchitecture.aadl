@@ -1,0 +1,398 @@
+package LogicalArchitecture
+public
+	with messages,Base_Types,MBED;
+
+-- ****************************** Monitor component ****************************** --
+	process Monitor
+		features
+			lidarData_data: in event data port messages::LidarRange;  -- TODO: CHECK IF CORRECT
+			lidarData_received: in event data port messages::boolean;  -- TODO: CHECK IF CORRECT
+			outputData: out event data port messages::LidarRange;       -- TODO: CANNOT DETERMINE TYPE (event|data|event data)
+			dataToSend: out event data port messages::boolean;       -- TODO: CANNOT DETERMINE TYPE (event|data|event data)
+	end Monitor;
+
+	process implementation Monitor.impl
+		subcomponents
+			i0: thread i0;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			Initialise: thread Initialise;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			ReadInput: thread ReadInput;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			ProcessData: thread ProcessData;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			RecordData: thread RecordData;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			SendData: thread SendData;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			j0: thread j0;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+
+		connections
+			I1: port input_name -> thread_name.input_name;               -- TODO: CANNOT RESOLVE CONNECTIONS!!
+			O1: port thread_name.output_name -> output_name;             -- TODO: CANNOT RESOLVE CONNECTIONS!!
+
+	end Monitor.impl;
+
+	thread i0
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end i0;
+
+	thread implementation i0.impl
+	end i0.impl;
+
+	thread Initialise
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end Initialise;
+
+	thread implementation Initialise.impl
+	end Initialise.impl;
+
+	thread ReadInput
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end ReadInput;
+
+	thread implementation ReadInput.impl
+	end ReadInput.impl;
+
+	thread ProcessData
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end ProcessData;
+
+	thread implementation ProcessData.impl
+	end ProcessData.impl;
+
+	thread RecordData
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end RecordData;
+
+	thread implementation RecordData.impl
+	end RecordData.impl;
+
+	thread SendData
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end SendData;
+
+	thread implementation SendData.impl
+	end SendData.impl;
+
+	thread j0
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end j0;
+
+	thread implementation j0.impl
+	end j0.impl;
+
+-- ****************************** Analyse component ****************************** --
+	process Analyse
+		features
+			data: out event data port messages::LidarRange;       -- TODO: CANNOT DETERMINE TYPE (event|data|event data)
+			anomalyDetected: out event data port messages::boolean;       -- TODO: CANNOT DETERMINE TYPE (event|data|event data)
+			awaitingAdaptation: out event data port messages::boolean;       -- TODO: CANNOT DETERMINE TYPE (event|data|event data)
+	end Analyse;
+
+	process implementation Analyse.impl
+		subcomponents
+			i0: thread i0;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			Initialise: thread Initialise;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			WaitForData: thread WaitForData;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			AnalyseAnomaly: thread AnalyseAnomaly;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			AnalysisComplete: thread AnalysisComplete;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+
+		connections
+			I1: port input_name -> thread_name.input_name;               -- TODO: CANNOT RESOLVE CONNECTIONS!!
+			O1: port thread_name.output_name -> output_name;             -- TODO: CANNOT RESOLVE CONNECTIONS!!
+
+	end Analyse.impl;
+
+	thread i0
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end i0;
+
+	thread implementation i0.impl
+	end i0.impl;
+
+	thread Initialise
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end Initialise;
+
+	thread implementation Initialise.impl
+	end Initialise.impl;
+
+	thread WaitForData
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end WaitForData;
+
+	thread implementation WaitForData.impl
+	end WaitForData.impl;
+
+	thread AnalyseAnomaly
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end AnalyseAnomaly;
+
+	thread implementation AnalyseAnomaly.impl
+	end AnalyseAnomaly.impl;
+
+	thread AnalysisComplete
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end AnalysisComplete;
+
+	thread implementation AnalysisComplete.impl
+	end AnalysisComplete.impl;
+
+-- ****************************** Plan component ****************************** --
+	process Plan
+		features
+	end Plan;
+
+	process implementation Plan.impl
+		subcomponents
+			i0: thread i0;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			Initialise: thread Initialise;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			WaitForSignal: thread WaitForSignal;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			MakePlan: thread MakePlan;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			PlanMade: thread PlanMade;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			WaitForVerification: thread WaitForVerification;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			Replan: thread Replan;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+
+		connections
+			I1: port input_name -> thread_name.input_name;               -- TODO: CANNOT RESOLVE CONNECTIONS!!
+			O1: port thread_name.output_name -> output_name;             -- TODO: CANNOT RESOLVE CONNECTIONS!!
+
+	end Plan.impl;
+
+	thread i0
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end i0;
+
+	thread implementation i0.impl
+	end i0.impl;
+
+	thread Initialise
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end Initialise;
+
+	thread implementation Initialise.impl
+	end Initialise.impl;
+
+	thread WaitForSignal
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end WaitForSignal;
+
+	thread implementation WaitForSignal.impl
+	end WaitForSignal.impl;
+
+	thread MakePlan
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end MakePlan;
+
+	thread implementation MakePlan.impl
+	end MakePlan.impl;
+
+	thread PlanMade
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end PlanMade;
+
+	thread implementation PlanMade.impl
+	end PlanMade.impl;
+
+	thread WaitForVerification
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end WaitForVerification;
+
+	thread implementation WaitForVerification.impl
+	end WaitForVerification.impl;
+
+	thread Replan
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end Replan;
+
+	thread implementation Replan.impl
+	end Replan.impl;
+
+-- ****************************** Legitimate component ****************************** --
+	process Legitimate
+		features
+			planLegitimated: out event data port messages::boolean;       -- TODO: CANNOT DETERMINE TYPE (event|data|event data)
+	end Legitimate;
+
+	process implementation Legitimate.impl
+		subcomponents
+			i0: thread i0;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			Initialise: thread Initialise;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			WaitForSignal: thread WaitForSignal;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			PerformVerification: thread PerformVerification;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+
+		connections
+			I1: port input_name -> thread_name.input_name;               -- TODO: CANNOT RESOLVE CONNECTIONS!!
+			O1: port thread_name.output_name -> output_name;             -- TODO: CANNOT RESOLVE CONNECTIONS!!
+
+	end Legitimate.impl;
+
+	thread i0
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end i0;
+
+	thread implementation i0.impl
+	end i0.impl;
+
+	thread Initialise
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end Initialise;
+
+	thread implementation Initialise.impl
+	end Initialise.impl;
+
+	thread WaitForSignal
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end WaitForSignal;
+
+	thread implementation WaitForSignal.impl
+	end WaitForSignal.impl;
+
+	thread PerformVerification
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end PerformVerification;
+
+	thread implementation PerformVerification.impl
+	end PerformVerification.impl;
+
+-- ****************************** Execute component ****************************** --
+	process Execute
+		features
+	end Execute;
+
+	process implementation Execute.impl
+		subcomponents
+			i0: thread i0;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			Initialise: thread Initialise;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			SendOutputs: thread SendOutputs;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			WaitForSignal: thread WaitForSignal;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			FinishAdaptation: thread FinishAdaptation;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+
+		connections
+			I1: port input_name -> thread_name.input_name;               -- TODO: CANNOT RESOLVE CONNECTIONS!!
+			O1: port thread_name.output_name -> output_name;             -- TODO: CANNOT RESOLVE CONNECTIONS!!
+
+	end Execute.impl;
+
+	thread i0
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end i0;
+
+	thread implementation i0.impl
+	end i0.impl;
+
+	thread Initialise
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end Initialise;
+
+	thread implementation Initialise.impl
+	end Initialise.impl;
+
+	thread SendOutputs
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end SendOutputs;
+
+	thread implementation SendOutputs.impl
+	end SendOutputs.impl;
+
+	thread WaitForSignal
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end WaitForSignal;
+
+	thread implementation WaitForSignal.impl
+	end WaitForSignal.impl;
+
+	thread FinishAdaptation
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end FinishAdaptation;
+
+	thread implementation FinishAdaptation.impl
+	end FinishAdaptation.impl;
+
+-- ****************************** Knowledge component ****************************** --
+	process Knowledge
+		features
+	end Knowledge;
+
+	process implementation Knowledge.impl
+		subcomponents
+			i0: thread i0;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+			RelayKnowledge: thread RelayKnowledge;                          -- TODO: FILTER SO THAT NOT ALL STATES ARE TRANSFORMED INTO THREADS
+
+		connections
+			I1: port input_name -> thread_name.input_name;               -- TODO: CANNOT RESOLVE CONNECTIONS!!
+			O1: port thread_name.output_name -> output_name;             -- TODO: CANNOT RESOLVE CONNECTIONS!!
+
+	end Knowledge.impl;
+
+	thread i0
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end i0;
+
+	thread implementation i0.impl
+	end i0.impl;
+
+	thread RelayKnowledge
+		features
+			input_name: in event data port messages::input_type;                 -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+			output_name: out event data port messages::output_name;              -- TODO: CANNOT RESOLVE INPUT/OUTPUT DATA/EVENTS TO STATE LEVEL!!
+	end RelayKnowledge;
+
+	thread implementation RelayKnowledge.impl
+	end RelayKnowledge.impl;
+
+
+end LogicalArchitecture;

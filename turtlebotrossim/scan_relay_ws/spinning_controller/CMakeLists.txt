@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(spinning_controller)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 set(CMAKE_CXX_STANDARD 20)
 
 find_package(ament_cmake REQUIRED)

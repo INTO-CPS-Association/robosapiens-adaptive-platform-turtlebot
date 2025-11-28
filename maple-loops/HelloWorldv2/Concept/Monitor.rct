@@ -1,0 +1,76 @@
+package Monitor
+
+import MAPLEK::*
+import Knowledge::*
+
+interface InputVariables {
+	var lidarData_data : LidarRange
+}
+
+interface InputFlags {
+	var lidarData_received : boolean
+}
+
+stm Monitor {
+	uses Adaptation_Inputs
+	uses Adaptation_RecordedData_events
+	uses Adaptation_RecordedData_set_events
+	uses InputVariables
+	uses InputFlags
+	var outputData : LidarRange
+	var dataToSend : boolean
+	event processedData : LidarRange
+
+
+	initial i0
+	state Initialise {
+	}
+	state ReadInput {
+	}
+	state ProcessData {
+	}
+	state RecordData {
+	}
+	state SendData {
+	}
+
+	junction j0
+	transition t0 {
+		from i0
+		to Initialise
+	}
+	transition t1 {
+		from Initialise
+		to ReadInput
+	}
+	transition t2 {
+		from ReadInput
+		to ProcessData
+		trigger lidarData ? lidarData_data
+		action lidarData_received = true
+	}
+	transition t3 {
+		from ProcessData
+		to RecordData
+	}
+	transition t4 {
+		from RecordData
+		to j0
+	}
+	transition t5 {
+		from j0
+		to ReadInput
+		condition not dataToSend
+	}
+	transition t6 {
+		from j0
+		to SendData
+		condition dataToSend
+	}
+	transition t7 {
+		from SendData
+		to ReadInput
+		action processedData ! outputData ; dataToSend = false
+	}
+}
+

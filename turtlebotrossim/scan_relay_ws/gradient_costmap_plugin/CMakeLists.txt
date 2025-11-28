@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(gradient_costmap_plugin)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 set(lib_name ${PROJECT_NAME}_core)
 
 # === Environment ===

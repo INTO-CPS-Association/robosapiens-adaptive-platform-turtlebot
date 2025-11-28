@@ -1,118 +1,125 @@
-# RoboSapiensAdaptivePlatform-turtlebotsim
+# RoboSapiens Adaptive Platform (Turtlebot Simulator)
 
-Run the Turtlebot4 gazebo simulator using Robosapiense Adaptive Platform 
+This project supports running a complete self-adaptive system for handling LiDAR occulusion anomolies for a Turtlebot4. This includes a self-adaptive MAPLE-K loop implemented using the RoboSapiens Adaptive Platform, Gazebo simulation of the TurtleBot 4.
 
-# RUN The gazebo simulator using Docker file 
+The repository provides a devcontainer providing all of the services required to run the system.
+Opening one of the devcontainers launches the entire project along with all its dependencies (ROS, MQTT, etc.).
 
-```bash 
-cd docker 
+## Getting Started
+
+### System Requirements
+
+This repository has been developed and tested primarily on Linux. It depends on Docker to run the images, x11 to display graphical applications, and Visual Studio Code to launch the devcontainers.
+
+You must have [Nvidia container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) installed to use this option.
+
+### X11 Permissions
+
+In order for the container to launch graphical applications, you grant x11 authentication permissions using the following command:
+```bash
+
+xhost +
 ```
-if you have nvidia graphic use:
+This must be run after every reboot before launching the containers.
 
-```bash 
-docker compose up simdeploynvidia
-```
-otherwise: 
-```bash 
-docker compose up simdeploymesa
-```
-Then use ctrl+shift+P and run "Rebuild and Reopen in container" to run the code in the dev container 
+### Launching the Full Project
 
-In terminal run : 
-```bash 
-python3 RaP_Lidar_Occlusion.py
-```
+1. **Open the Full DevContainer:**
+   You can open the Visual Studio Code devcontainer for the project in order to run the necessary services, and use the development environment for the adaptive loop.
+   To do this, first open the folder for the repository in Visual Studio Code.
+   It should prompt you to **"Reopen in Container"** or alternatively, you can open the dev container by pressing Ctrl+Shift+P and selecting **"Rebuild and Reopen in Container"**.
+   You should select one of the full devcontainer configurations which matches your hardware (e.g., [`.devcontainer/nvidia-full-tb3/devcontainer.json`](.devcontainer/nvidia-full-tb3/devcontainer.json) or [`.devcontainer/mesa-full-tb3/devcontainer.json`](.devcontainer/mesa-full-tb3/devcontainer.json)) in Visual Studio Code (see **Devcontainer Variants**).
 
+3. **Services in the Container:**  
+   The devcontainer setup automatically starts all the necessary services for:
+   - Simulation (Gazebo)
+   - ROS integration
+   - MQTT communication
+  
+   But you will need to launch the self-adaptive loop and trustworthiness checker yourself (see below).
 
-# Step1: RUN The Robot or simulator whithout Docker 
+### Running the Self-Adaptive Loop
 
-Run the simulation using this command 
+To launch the self-adaptive loop:
 
-```sh
-ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=maze slam:=true nav2:=true rviz:=true
-```
-Or turn on the real robot 
-
-
-### Auxiullary ROS2 node on the robot 
-scan_safe and spin functions are working using this nodes 
-
-```sh
-cd scan_relay_ws
-```
-```sh
-rosdep install -i --from-path spin_interfaces --rosdistro humble
-```
-```sh
-colcon build --packages-select spin_interfaces
-```
-
-```sh
- rosdep install -i --from-path demo_bringup --rosdistro humble
- rosdep install -i --from-path scan_modifier --rosdistro humble
- rosdep install -i --from-path spinning_controller --rosdistro humble
-rosdep install -i --from-path topic_param_bridge --rosdistro humble
+```bash
+cd maple-loops/HelloWorld
+python3 main.py
 ```
 
-```sh
-colcon build --packages-select demo_bringup scan_modifier spinning_controller topic_param_bridge
+This will log its progress in `maple-loops/HelloWorld/MAPE_test.log`.
 
-```
-Run all auxiullary nodes: 
-```sh
-cd scan_relay_ws
-source install/setup.bash
-ros2 launch demo_bringup real_demo_tb4.launch.py
-```
-### oclude the lidar on simulator 
+You can also launch a live dashboard showing the current loop stage and LiDAR mask using:
 
-docker exec container name! 
-```sh
-ros2 topic pub --once /scan_config std_msgs/msg/UInt16MultiArray "{data:[300, 800]}"
+```bash
+cd maple-loops/HelloWorld
+python3 LiveDashboard.py
 ```
 
-#### Useful Notes
-If you can't see the robot ros topics:
+### Launching the Trustworthiness Checker
+The Trustworthiness Checker is available as a separate Docker Compose service.
+You can run it independently in a host terminal by running e.g.
 
-```sh
-export ROS_DOMAIN_ID=0
-```
-Useful Termonal commands for real robot: 
-```sh
-ros2 launch turtlebot4_navigation slam.launch.py sync:=false
-
-```
-```sh
-ros2 launch turtlebot4_viz view_robot.launch.py
+```bash
+cd docker/
+docker compose run --rm trustworthiness-checker /mnt/host_models/maple_seq.lola --input-mqtt-topics stage --output-stdout
 ```
 
-```sh
-ros2 launch turtlebot4_navigation nav2.launch.py
+This example runs the trustworthiness checker on the model `trustworthiness-specs/maple_seq.lola` from the input MQTT topic `stage` (provided by the self-adaptive loop) and outputs verdicts to STDOUT.
+You can also change this to output to MQTT topics via the command:
 
+```bash
+cd docker/
+docker compose run --rm trustworthiness-checker /mnt/host_models/maple_seq.lola --input-mqtt-topics stage --output-mqtt-topics m a p l e maple
 ```
 
-Useful ROS2 commands to remember: 
+## Devcontainer Variants
+This repository includes several devcontainer variants to support different hardware and simulation configurations:
 
-- Read IP: ros2 topic echo /ip
-- Read LiDAR data raw: ros2 topic echo /scan
-- See topics being published: ros2 topic list
-- Undock robot: ros2 action send_goal /undock irobot_create_msgs/action/Undock "{}"
-- Dock robot: ros2 action send_goal /dock irobot_create_msgs/action/Dock "{}"
+### RoboSapiens Adaptive Platform -- Full TB4 Gazebo (NVIDIA GPU):
 
+Provides a full development environment for running the TurtleBot 4 simulation using Gazebo on systems with NVIDIA GPUs. It automatically builds and starts all necessary services and installs the required dependencies after container start-up.
 
-## Step2: RUN The MQTT broker and ROS2MQTTBridge   
+### RoboSapiens Adaptive Platform -- Full TB3 Gazebo (NVIDIA GPU):
 
-Run the simulation using this command 
+Tailored for running TB3 (TurtleBot 3) simulations with NVIDIA GPU support. Features similar configurations as the TB4 variant but adapted for TB3 simulation parameters.
 
-```sh
-sudo service emqx start
-source scan_relay_ws/install/setup.bash
-python3 ROS2MQTTBridge/ROS2MqttBridge.py 
+### RoboSapiens Adaptive Platform -- Full Gazebo TB4 (MESA):
+
+Designed for systems without NVIDIA GPUs. This variant uses the MESA graphics stack to enable full Gazebo simulation for TurtleBot 4. It still provides all the integrated services to run the adaptive platform.
+
+### RoboSapiens Adaptive Platform -- Full TB3 Gazebo (MESA):
+
+Tailored for running TB3 (TurtleBot 3) simulations with MESA graphics. Features similar configurations as the TB4 variant but adapted for TB3 simulation parameters.
+
+### RoboSapiens Adaptive Platform -- Full Gazebo TB4 (No GPU):
+
+Provides a complete Gazebo simulation environment for TurtleBot 4 for machines without GPU acceleration. It ensures that users without any graphics hardware can still run the full self-adaptive system, but may be painfully slow.
+
+### RoboSapiens Adaptive Platform -- Full TB3 Gazebo (No GPU):
+
+Tailored for running TB3 (TurtleBot 3) simulations with no GPU acceleration. Features similar configurations as the TB4 variant but adapted for TB3 simulation parameters.
+
+### Non-full variants
+
+These variants just run the main devcontainer without any dependencies. They are useful when separately developing new versions of these dependencies, or for running Gazebo locally.
+
+## Devcontainer command line
+
+It is also possible to run the project without Visual Studio code by using the commandline devcontainers tool.
+You can install this tool using
+```bash
+
+npm install -g @devcontainers/cli
 ```
 
-## Step3: RUN The Robosaoiense Adaptive Platform 
+Then you can launch the devcontainer using e.g.
+```bash
 
-```sh
-sudo service emqx start
-python3 Rap_Lidar_Occlusion.py 
+devcontainer up --workspace-folder $(pwd) --config .devcontainer/mesa-full-tb3/devcontainer.json
+```
+and open a shell in the devcontainer using
+```bash
+
+devcontainer exec --workspace-folder $(pwd) --config .devcontainer/mesa-full-tb3/devcontainer.json /bin/bash
 ```

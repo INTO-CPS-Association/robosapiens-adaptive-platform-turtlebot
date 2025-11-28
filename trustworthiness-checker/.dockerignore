@@ -1,0 +1,8 @@
+.devcontainer/*
+.github/*
+.idea/*
+.vscode/*
+.git/*
+target/*
+docker/Dockerfile
+docker/docker-compose.yaml

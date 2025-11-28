@@ -1,0 +1,52 @@
+
+
+services:
+  emqx-enterprise:
+    image: emqx/emqx-enterprise:5.0.4
+    container_name: emqx
+    healthcheck:
+      test: [ "CMD", "emqx", "ping" ]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+    ports:
+      - 1883:1883
+      - 18083:18083
+  redis:
+    image: redis:latest
+    container_name: C_redis
+    restart: always
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+
+  monitor:
+    build:
+        context: ./../../../../
+        dockerfile: ./Deployment/Nodes/Monitor/Dockerfile
+    network_mode: "host"	
+    environment:
+      - MQTT_BROKER = "localhost"
+      - REDIS_HOST = "localhost"	
+    container_name: C_Monitor
+    depends_on:
+      emqx-enterprise:
+          condition: service_healthy
+
+  execute:
+    build:
+        context: ./../../../../
+        dockerfile: ./Deployment/Nodes/Execute/Dockerfile
+    container_name: C_Execute
+    depends_on:
+        emqx-enterprise:
+            condition: service_healthy
+    network_mode: "host"	
+    environment:
+      - MQTT_BROKER = "localhost"
+      - REDIS_HOST = "localhost"	
+

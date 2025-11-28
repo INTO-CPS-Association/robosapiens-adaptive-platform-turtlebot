@@ -1,0 +1,5 @@
+<library path="spin_panel">
+    <class type="spin_panel::SpinPanel" base_class_type="rviz_common::Panel">
+        <description></description>
+    </class>
+</library>

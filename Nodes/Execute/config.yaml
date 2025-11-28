@@ -1,0 +1,80 @@
+logger:
+  endpoints:
+    - endpoint:
+        type: "logging"
+        name: "RemoteLog"
+        class: "LogMessage"
+        topic: "/RemoteLog"
+        QoS: 10
+
+knowledgeIn:
+  properties:
+    - property:
+        type: "data"
+        name: "isLegit"
+        class: "isLegit"
+        topic: "/isLegit"
+        QoS: 10
+    - property:
+        type: "data"
+        name: "directions"
+        class: "directions"
+        topic: "/directions"
+        QoS: 10
+
+knowledgeOut:
+  properties:
+    - property:
+        type: "data"
+        name: "spin_config"
+        class: "spin_config"
+        topic: "/spin_config"
+        QoS: 10
+
+eventIn:
+  properties:
+    - property:
+        type: "event"
+        name: "new_plan"
+        class: "-"
+        topic: "/new_plan"
+        QoS: 10
+    - property:
+        type: "event"
+        name: "isLegit"
+        class: "-"
+        topic: "/isLegit"
+        QoS: 10
+
+eventOut:
+  properties:
+    - property:
+        type: "event"
+        name: "/spin_config"
+        class: "-"
+        topic: "/spin_config"
+        QoS: 10
+
+
+mqtt_broker: "localhost"
+mqtt_port: 1883
+
+mqtt_subscribe_topics:
+  - "new_plan"
+
+mqtt_publish_topics:
+  - "/spin_config"
+
+redis_host: "localhost"
+redis_port: 6379
+
+logging:
+  level: "DEBUG"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "MAPE_test.log"
+
+knowledge_config:
+  storage_type: "global"
+  redis_host: "localhost"
+  redis_port: 6379
+  redis_db: 0

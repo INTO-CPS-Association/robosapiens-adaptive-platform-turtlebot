@@ -1,0 +1,257 @@
+package Knowledge
+
+import MAPLEK::*
+
+enumeration Component {
+	MONITOR
+	ANALYSE
+	PLAN
+	LEGITIMATE
+	EXECUTE
+}
+
+interface Adaptation_RecordedData_events {
+	event lidarScans : Seq(LidarRange)
+	event get_lidarScans
+}
+interface Adaptation_RecordedData_set_events {
+	event set_lidarScans : Seq(LidarRange)
+}
+interface Adaptation_RecordedData_Analyse_events {
+	event lidarScans_Analyse : Seq(LidarRange)
+	event get_lidarScans_Analyse
+}
+interface Adaptation_RecordedData_Plan_events {
+	event lidarScans_Plan : Seq(LidarRange)
+	event get_lidarScans_Plan
+}
+interface Adaptation_RecordedData_Legitimate_events {
+	event lidarScans_Legitimate : Seq(LidarRange)
+	event get_lidarScans_Legitimate
+}
+interface Adaptation_RecordedData_ext_events {
+	event lidarScans_ext : Seq(LidarRange)
+	event get_lidarScans_ext
+}
+
+interface Adaptation_AnalysisResults_events {
+	event boolLidarMasks : Seq(BoolLidarMask)
+	event probLidarMasks : Seq(ProbLidarMask)
+	event get_boolLidarMasks
+	event get_probLidarMasks
+}
+interface Adaptation_AnalysisResults_set_events {
+	event set_boolLidarMasks : Seq(BoolLidarMask)
+	event set_probLidarMasks : Seq(ProbLidarMask)
+}
+interface Adaptation_AnalysisResults_Plan_events {
+	event boolLidarMasks_Plan : Seq(BoolLidarMask)
+	event probLidarMasks_Plan : Seq(ProbLidarMask)
+	event get_boolLidarMasks_Plan
+	event get_probLidarMasks_Plan
+}
+interface Adaptation_AnalysisResults_Legitimate_events {
+	event boolLidarMasks_Legitimate : Seq(BoolLidarMask)
+	event probLidarMasks_Legitimate : Seq(ProbLidarMask)
+	event get_boolLidarMasks_Legitimate
+	event get_probLidarMasks_Legitimate
+}
+interface Adaptation_AnalysisResults_ext_events {
+	event boolLidarMasks_ext : Seq(BoolLidarMask)
+	event probLidarMasks_ext : Seq(ProbLidarMask)
+	event get_boolLidarMasks_ext
+	event get_probLidarMasks_ext
+}
+
+interface Adaptation_PlanData_events {
+	event directions: Seq(SpinCommand)
+	event get_directions
+}
+interface Adaptation_PlanData_set_events {
+	event set_directions: Seq(SpinCommand)
+}
+interface Adaptation_PlanData_Legitimate_events {
+	event directions_Legitimate: Seq(SpinCommand)
+	event get_directions_Legitimate
+}
+interface Adaptation_PlanData_Execute_events {
+	event directions_Execute: Seq(SpinCommand)
+	event get_directions_Execute
+}
+interface Adaptation_PlanData_ext_events {
+	event directions_ext: Seq(SpinCommand)
+	event get_directions_ext
+}
+
+interface Adaptation_VerificationInfo_events {
+}
+interface Adaptation_VerificationInfo_set_events {
+}
+interface Adaptation_VerificationInfo_Plan_events {
+}
+interface Adaptation_VerificationInfo_ext_events {
+}
+
+stm Knowledge {
+	uses Adaptation_RecordedData_events
+	uses Adaptation_RecordedData_set_events
+	uses Adaptation_RecordedData_Analyse_events
+	uses Adaptation_RecordedData_Plan_events
+	uses Adaptation_RecordedData_Legitimate_events
+	uses Adaptation_RecordedData_ext_events
+	
+	uses Adaptation_AnalysisResults_events
+	uses Adaptation_AnalysisResults_set_events
+	uses Adaptation_AnalysisResults_Plan_events
+	uses Adaptation_AnalysisResults_Legitimate_events
+	uses Adaptation_AnalysisResults_ext_events
+	
+	uses Adaptation_PlanData_events
+	uses Adaptation_PlanData_set_events
+	uses Adaptation_PlanData_Legitimate_events
+	uses Adaptation_PlanData_Execute_events
+	uses Adaptation_PlanData_ext_events
+	
+	uses Adaptation_VerificationInfo_events
+	uses Adaptation_VerificationInfo_set_events
+	uses Adaptation_VerificationInfo_Plan_events
+	uses Adaptation_VerificationInfo_ext_events
+	
+	uses Adaptation_RecordedData
+	uses Adaptation_AnalysisResults
+	uses Adaptation_PlanData
+	uses Adaptation_VerificationInfo
+	initial i0
+	state RelayKnowledge {
+	}
+	transition t0 {
+		from i0
+		to RelayKnowledge
+	}
+	transition t1 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_lidarScans
+		action lidarScans ! lidarScans
+	}
+	transition t2 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger set_lidarScans ? lidarScans
+	}
+	transition t3 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_lidarScans_Analyse
+		action lidarScans_Analyse ! lidarScans
+	}
+	transition t4 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_lidarScans_Plan
+		action lidarScans_Plan ! lidarScans
+	}
+	transition t5 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_lidarScans_Legitimate
+		action lidarScans_Legitimate ! lidarScans
+	}
+	transition t6 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_lidarScans_ext
+		action lidarScans_ext ! lidarScans
+	}
+	
+	transition t7 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_boolLidarMasks
+		action boolLidarMasks ! boolLidarMasks
+	}
+	transition t8 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger set_boolLidarMasks ? boolLidarMasks
+	}
+	transition t9 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_boolLidarMasks_Plan
+		action boolLidarMasks_Plan ! boolLidarMasks
+	}
+	transition t10 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_boolLidarMasks_Legitimate
+		action boolLidarMasks_Legitimate ! boolLidarMasks
+	}
+	transition t11 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_boolLidarMasks_ext
+		action boolLidarMasks_ext ! boolLidarMasks
+	}
+	
+	transition t12 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_probLidarMasks
+		action probLidarMasks ! probLidarMasks
+	}
+	transition t13 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger set_probLidarMasks ? probLidarMasks
+	}
+	transition t14 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_probLidarMasks_Plan
+		action probLidarMasks_Plan ! probLidarMasks
+	}
+	transition t15 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_probLidarMasks_Legitimate
+		action probLidarMasks_Legitimate ! probLidarMasks
+	}
+	transition t16 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_probLidarMasks_ext
+		action probLidarMasks_ext ! probLidarMasks
+	}
+	
+	transition t17 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_directions
+		action directions ! directions
+	}
+	transition t18 {
+		from RelayKnowledge
+		to RelayKnowledge
+		action set_directions ? directions
+	}
+	transition t19 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_directions_Legitimate
+		action directions_Legitimate ! directions
+	}
+	transition t20 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_directions_Execute
+		action directions_Execute ! directions
+	}
+	transition t21 {
+		from RelayKnowledge
+		to RelayKnowledge
+		trigger get_directions_ext
+		action directions_ext ! directions
+	}
+}
+

@@ -1,0 +1,118 @@
+
+
+services:
+  emqx-enterprise:
+    image: emqx/emqx-enterprise:5.0.4
+    container_name: emqx
+    healthcheck:
+      test: [ "CMD", "emqx", "ping" ]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+    ports:
+      - 1883:1883
+      - 18083:18083
+  redis:
+    image: redis:latest
+    container_name: C_redis
+    restart: always
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+
+  # maple-k:
+  #   build: 
+  #     context: ./ManagingSystem
+  #     dockerfile: ./Dockerfile
+  #   container_name: maple
+  #   network_mode: "host"	
+  #   environment:
+  #     - MQTT_BROKER = "localhost"
+  #     - REDIS_HOST = "localhost"	
+  #   depends_on:
+  #     emqx-enterprise:
+  #         condition: service_healthy
+  #   ports:
+  #     - 8050:8050
+  monitor:
+    build:
+        context: ./../../../../
+        dockerfile: ./Deployment/Nodes/Monitor/Dockerfile
+    network_mode: "host"	
+    environment:
+      - MQTT_BROKER = "localhost"
+      - REDIS_HOST = "localhost"	
+    container_name: C_Monitor
+    depends_on:
+      emqx-enterprise:
+          condition: service_healthy
+
+  analysis:
+    build:
+        context: ./../../../../
+        dockerfile: ./Deployment/Nodes/Analysis/Dockerfile
+    network_mode: "host"	
+    environment:
+      - MQTT_BROKER = "localhost"
+      - REDIS_HOST = "localhost"	
+    container_name: C_Analysis
+    depends_on:
+        emqx-enterprise:
+            condition: service_healthy
+
+  plan:
+    build:
+        context: ./../../../../
+        dockerfile: ./Deployment/Nodes/Plan/Dockerfile
+    network_mode: "host"	
+    environment:
+      - MQTT_BROKER = "localhost"
+      - REDIS_HOST = "localhost"	
+    container_name: C_Plan
+    depends_on:
+        emqx-enterprise:
+            condition: service_healthy
+
+
+  execute:
+    build:
+        context: ./../../../../
+        dockerfile: ./Deployment/Nodes/Execute/Dockerfile
+    container_name: C_Execute
+    depends_on:
+        emqx-enterprise:
+            condition: service_healthy
+    network_mode: "host"	
+    environment:
+      - MQTT_BROKER = "localhost"
+      - REDIS_HOST = "localhost"	
+
+#  rosmqttbridge:
+#    build:
+#      context: ./Bridge
+#      dockerfile: Dockerfile.simple
+#    container_name: bridge
+#    network_mode: "host"
+#    depends_on:
+#      emqx-enterprise:
+#          condition: service_healthy
+#
+    
+  # simulator:
+  #   build: 
+  #     context: ./ManagedSystem
+  #     dockerfile: ./Dockerfile
+  #   container_name: turtle_simulator
+  #   network_mode: "host"
+  #   ports:
+  #     - "8081:8081"
+  #   environment:
+  #     - ENV_VAR=example
+
+# networks:
+#   emqx-net:
+#     name: emqx-net

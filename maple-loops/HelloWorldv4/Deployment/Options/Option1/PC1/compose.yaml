@@ -1,0 +1,24 @@
+
+
+services:
+  analysis:
+    build:
+        context: ./../../../../
+        dockerfile: ./Deployment/Nodes/Analysis/Dockerfile
+    network_mode: "host"	
+    environment:
+      - MQTT_BROKER = "localhost"
+      - REDIS_HOST = "localhost"	
+    container_name: C_Analysis
+
+
+  plan:
+    build:
+        context: ./../../../../
+        dockerfile: ./Deployment/Nodes/Plan/Dockerfile
+    network_mode: "host"	
+    environment:
+      - MQTT_BROKER = "localhost"
+      - REDIS_HOST = "localhost"	
+    container_name: C_Plan
+

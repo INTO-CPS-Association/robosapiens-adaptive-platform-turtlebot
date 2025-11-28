@@ -1,0 +1,62 @@
+logger:
+  endpoints:
+    - endpoint:
+        type: "logging"
+        name: "RemoteLog"
+        class: "LogMessage"
+        topic: "/RemoteLog"
+        QoS: 10
+
+knowledgeIn:
+  properties:
+    - property:
+        type: "data"
+        name: "laser_scan"
+        class: "laser_scan"
+        topic: "/laser_scan"
+        QoS: 10
+
+knowledgeOut:
+  properties:
+
+eventIn:
+  properties:
+    - property:
+        type: "event"
+        name: "new_data"
+        class: "-"
+        topic: "/new_data"
+        QoS: 10
+
+eventOut:
+  properties:
+    - property:
+        type: "event"
+        name: "anomaly"
+        class: "-"
+        topic: "/anomaly"
+        QoS: 10
+
+
+mqtt_broker: "localhost"
+mqtt_port: 1883
+
+mqtt_subscribe_topics:
+  - "new_data"
+
+mqtt_publish_topics:
+  - "anomaly"
+
+redis_host: "localhost"
+redis_port: 6379
+
+logging:
+  level: "DEBUG"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "MAPE_test.log"
+
+knowledge_config:
+  storage_type: "global"
+  redis_host: "localhost"
+  redis_port: 6379
+  redis_db: 0

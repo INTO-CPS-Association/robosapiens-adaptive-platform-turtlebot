@@ -1,0 +1,389 @@
+Monitor_Config:
+  Logger_Config:
+    log_level: DEBUG
+    logger_type: redis
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    terminal: {}
+    file:
+      filename: MAPLE.log
+    mqtt:
+      broker: localhost
+      port: 1883
+      topic: logs
+    redis:
+      host: localhost
+      port: 6379
+      channel: logs
+  knowledgeIn:
+    properties: null
+  knowledgeOut:
+    properties:
+      - property:
+          type: data
+          name: laser_scan
+          class: laser_scan
+          topic: /laser_scan
+          QoS: 10
+  eventIn:
+    properties:
+      - property:
+          type: event
+          name: /Scan
+          class: "-"
+          topic: /Scan
+          QoS: 10
+  eventOut:
+    properties:
+      - property:
+          type: event
+          name: new_data
+          class: "-"
+          topic: /new_data
+          QoS: 10
+  Event_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Message_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Knowledge_Config:
+    knowledge_type: redis
+    host: localhost
+    port: 6379
+    db: 0
+
+Analysis_Config:
+  Logger_Config:
+    log_level: DEBUG
+    logger_type: redis
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    terminal: {}
+    file:
+      filename: MAPLE.log
+    mqtt:
+      broker: localhost
+      port: 1883
+      topic: logs
+    redis:
+      host: localhost
+      port: 6379
+      channel: logs
+  knowledgeIn:
+    properties:
+      - property:
+          type: data
+          name: laser_scan
+          class: laser_scan
+          topic: /laser_scan
+          QoS: 10
+  knowledgeOut:
+    properties: null
+  eventIn:
+    properties:
+      - property:
+          type: event
+          name: new_data
+          class: "-"
+          topic: /new_data
+          QoS: 10
+  eventOut:
+    properties:
+      - property:
+          type: event
+          name: anomaly
+          class: "-"
+          topic: /anomaly
+          QoS: 10
+  Event_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Message_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Knowledge_Config:
+    knowledge_type: redis
+    host: localhost
+    port: 6379
+    db: 0
+
+Plan_Config:
+  Logger_Config:
+    log_level: DEBUG
+    logger_type: redis
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    terminal: {}
+    file:
+      filename: MAPLE.log
+    mqtt:
+      broker: localhost
+      port: 1883
+      topic: logs
+    redis:
+      host: localhost
+      port: 6379
+      channel: logs
+  knowledgeIn:
+    properties: null
+  knowledgeOut:
+    properties:
+      - property:
+          type: data
+          name: new_plan
+          class: new_plan
+          topic: /new_plan
+          QoS: 10
+      - property:
+          type: data
+          name: direction
+          class: direction
+          topic: /direction
+          QoS: 10
+  eventIn:
+    properties:
+      - property:
+          type: event
+          name: anomaly
+          class: "-"
+          topic: /anomaly
+          QoS: 10
+      - property:
+          type: event
+          name: anomaly
+          class: "-"
+          topic: /anomaly
+          QoS: 10
+  eventOut:
+    properties:
+      - property:
+          type: plan
+          name: new_plan
+          class: "-"
+          topic: /new_plan
+          QoS: 10
+  Event_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Message_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Knowledge_Config:
+    knowledge_type: redis
+    host: localhost
+    port: 6379
+    db: 0
+
+Execute_Config:
+  Logger_Config:
+    log_level: DEBUG
+    logger_type: redis
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    terminal: {}
+    file:
+      filename: MAPLE.log
+    mqtt:
+      broker: localhost
+      port: 1883
+      topic: logs
+    redis:
+      host: localhost
+      port: 6379
+      channel: logs
+  knowledgeIn:
+    properties:
+      - property:
+          type: data
+          name: isLegit
+          class: isLegit
+          topic: /isLegit
+          QoS: 10
+      - property:
+          type: data
+          name: directions
+          class: directions
+          topic: /directions
+          QoS: 10
+  knowledgeOut:
+    properties:
+      - property:
+          type: data
+          name: spin_config
+          class: spin_config
+          topic: /spin_config
+          QoS: 10
+  eventIn:
+    properties:
+      - property:
+          type: event
+          name: new_plan
+          class: "-"
+          topic: /new_plan
+          QoS: 10
+      - property:
+          type: event
+          name: isLegit
+          class: "-"
+          topic: /isLegit
+          QoS: 10
+  eventOut:
+    properties:
+      - property:
+          type: event
+          name: /spin_config
+          class: "-"
+          topic: /spin_config
+          QoS: 10
+  Event_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Message_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Knowledge_Config:
+    knowledge_type: redis
+    host: localhost
+    port: 6379
+    db: 0
+
+Legitimate_Config:
+  Logger_Config:
+    log_level: DEBUG
+    logger_type: redis
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    terminal: {}
+    file:
+      filename: MAPLE.log
+    mqtt:
+      broker: localhost
+      port: 1883
+      topic: logs
+    redis:
+      host: localhost
+      port: 6379
+      channel: logs
+  knowledgeIn:
+    properties: null
+  knowledgeOut:
+    properties: null
+  eventIn:
+    properties:
+      - property:
+          type: event
+          name: new_plan
+          class: "-"
+          topic: /new_plan
+          QoS: 10
+  eventOut:
+    properties:
+      - property:
+          type: legitimate
+          name: isLegit
+          class: "-"
+          topic: /isLegit
+          QoS: 10
+  Event_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Message_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Knowledge_Config:
+    knowledge_type: redis
+    host: localhost
+    port: 6379
+    db: 0
+
+Trustworthiness_Config:
+  Logger_Config:
+    log_level: DEBUG
+    logger_type: redis
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    terminal: {}
+    file:
+      filename: MAPLE.log
+    mqtt:
+      broker: localhost
+      port: 1883
+      topic: logs
+    redis:
+      host: localhost
+      port: 6379
+      channel: logs
+  knowledgeIn:
+    properties: null
+  knowledgeOut:
+    properties:
+      - property:
+          type: data
+          name: new_plan
+          class: new_plan
+          topic: /new_plan
+          QoS: 10
+      - property:
+          type: data
+          name: direction
+          class: direction
+          topic: /direction
+          QoS: 10
+  eventIn:
+    properties:
+      - property:
+          type: event
+          name: anomaly
+          class: "-"
+          topic: /anomaly
+          QoS: 10
+      - property:
+          type: event
+          name: new_plan
+          class: "-"
+          topic: /new_plan
+          QoS: 10
+      - property:
+          type: event
+          name: isLegit
+          class: "-"
+          topic: /isLegit
+          QoS: 10
+      - property:
+          type: event
+          name: /spin_config
+          class: "-"
+          topic: /spin_config
+          QoS: 10
+      - property:
+          type: event
+          name: maple
+          class: "-"
+          topic: /maple
+          QoS: 10
+  eventOut:
+    properties:
+      - property:
+          type: stage
+          name: stage
+          class: "-"
+          topic: /stage
+          QoS: 10
+  Event_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Message_Manager_Config:
+    protocol: mqtt
+    broker: localhost
+    port: 1883
+  Knowledge_Config:
+    knowledge_type: redis
+    host: localhost
+    port: 6379
+    db: 0

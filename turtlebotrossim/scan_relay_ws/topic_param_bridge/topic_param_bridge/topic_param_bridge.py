@@ -3,7 +3,7 @@ from rclpy.node import Node
 
 from rclpy.parameter import Parameter
 from rcl_interfaces.srv import SetParameters
-from spin_interfaces.msg import SpinPeriodicCommands
+from spin_interfaces.msg import SpinPeriodicCommands, SpinCommand
 
 
 class TopicParamBridge(Node):
@@ -37,6 +37,12 @@ class TopicParamBridge(Node):
         spin_commands = [
             value for cmd in msg.commands for value in (cmd.omega, cmd.duration)
         ]
+
+        # Quirk with RCL dynamic parameter: When values are [] the parameter is ignored,
+        # and the callback is never called.
+        if not spin_commands:
+            spin_commands = [0.0, 0.0]
+            self.get_logger().info(f"Changing spin_commands to {spin_commands} due to RCL param quirk")
         spin_period = msg.period
 
         self.get_logger().info(f'Sending: "{spin_commands}" and "{spin_period}"')
@@ -58,7 +64,7 @@ class TopicParamBridge(Node):
             except Exception as e:
                 self.get_logger().error("Service call failed with exception: %r" % (e,))
             break
-        self.get_logger().info(f"Response: {response}")
+        # self.get_logger().info(f"Response: {response}")
 
 
 def main(args=None):

@@ -1,0 +1,2369 @@
+{
+    "_name": "adaptiveSystem",
+    "_description": "Example adaptive system",
+    "_verbose": false,
+    "_featureList": [],
+    "_systemList": [
+        {
+            "_name": "managingSystem",
+            "_description": "managing system part",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "ship_status",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "inport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "ShipStatus",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "ship_prediction_model",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "string"
+                            },
+                            {
+                                "_name": "surge_speed",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "sway_speed",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "yaw_rate",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "heading",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "x",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            },
+                            {
+                                "_name": "y",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_name": "weather_condition",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "inport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "WeatherCondition",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "rudder_angle",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            },
+                            {
+                                "_name": "wind_direction",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            },
+                            {
+                                "_name": "wind_speed",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_name": "new_model",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "outport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "Model",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "ship_prediction_model",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "string"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "_systemList": [],
+            "_processList": [
+                {
+                    "_name": "Monitor",
+                    "_description": "monitor component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "ship_status",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "ShipStatus",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ship_prediction_model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "string"
+                                    },
+                                    {
+                                        "_name": "surge_speed",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "sway_speed",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "yaw_rate",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "heading",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "x",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "y",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "weather_condition",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "WeatherCondition",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "rudder_angle",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "wind_direction",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "wind_speed",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "new_data",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "NewData",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "new_data",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "monitor_ship",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "ship_status",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "ShipStatus",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            },
+                                            {
+                                                "_name": "surge_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "sway_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "yaw_rate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "heading",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "x",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "y",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_data",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewData",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "new_data",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "ship_status"
+                        },
+                        {
+                            "_name": "monitor_weather",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "weather_condition",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "WeatherCondition",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "rudder_angle",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "wind_direction",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "wind_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "weather_condition"
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                },
+                {
+                    "_name": "Analysis",
+                    "_description": "analysis component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "ShipStatus",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "ShipStatus",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ship_prediction_model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "string"
+                                    },
+                                    {
+                                        "_name": "surge_speed",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "sway_speed",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "yaw_rate",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "heading",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "x",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "y",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "WeatherCondition",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "WeatherCondition",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "rudder_angle",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "wind_direction",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "wind_speed",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "anomaly",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "AnomalyMessage",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "anomaly",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "analyse_trajectory_prediction",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "ShipStatus",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "ShipStatus",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            },
+                                            {
+                                                "_name": "surge_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "sway_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "yaw_rate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "heading",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "x",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "y",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "WeatherCondition",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "WeatherCondition",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "rudder_angle",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "wind_direction",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "wind_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "anomaly",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "AnomalyMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "anomaly",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "new_data"
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                },
+                {
+                    "_name": "Plan",
+                    "_description": "plan component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "ShipStatus",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "ShipStatus",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ship_prediction_model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "string"
+                                    },
+                                    {
+                                        "_name": "surge_speed",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "sway_speed",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "yaw_rate",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "heading",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "x",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "y",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "new_plan",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "NewPlanMessage",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "New_plan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "Model",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "Model",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ship_prediction_model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "planner",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "ShipStatus",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "ShipStatus",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            },
+                                            {
+                                                "_name": "surge_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "sway_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "yaw_rate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "heading",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "x",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "y",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_plan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewPlanMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "New_plan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "Model",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "Model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "anomaly"
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                },
+                {
+                    "_name": "Legitimate",
+                    "_description": "legitimate component",
+                    "_verbose": false,
+                    "_featureList": [],
+                    "_threadList": [],
+                    "_formalism": "python",
+                    "_containerization": true
+                },
+                {
+                    "_name": "Execute",
+                    "_description": "execute component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "isLegit",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event data",
+                            "_message": {
+                                "_name": "LegitimateMessage",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "legitimate",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "Model",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "Model",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ship_prediction_model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "new_model",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "Model",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ship_prediction_model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "executer",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "isLegit",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event data",
+                                    "_message": {
+                                        "_name": "LegitimateMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "legitimate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "Model",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "Model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_model",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "Model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "new_plan"
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                }
+            ],
+            "_messageList": [],
+            "_processorList": [
+                {
+                    "_name": "xeon1",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "I1",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "port",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event data",
+                            "_message": null
+                        }
+                    ],
+                    "_propertyList": [
+                        {
+                            "_name": "MIPSCapacity",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_value": 1000.0,
+                            "_dataType": "MIPS"
+                        }
+                    ],
+                    "_bindingList": [
+                        {
+                            "_name": "Monitor",
+                            "_description": "monitor component",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "ship_status",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "ShipStatus",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            },
+                                            {
+                                                "_name": "surge_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "sway_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "yaw_rate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "heading",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "x",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "y",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "weather_condition",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "WeatherCondition",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "rudder_angle",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "wind_direction",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "wind_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_data",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewData",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "new_data",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_threadList": [
+                                {
+                                    "_name": "monitor_ship",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "ship_status",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "ShipStatus",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ship_prediction_model",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "string"
+                                                    },
+                                                    {
+                                                        "_name": "surge_speed",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "sway_speed",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "yaw_rate",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "heading",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "x",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "y",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "new_data",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "NewData",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "new_data",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": "ship_status"
+                                },
+                                {
+                                    "_name": "monitor_weather",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "weather_condition",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "WeatherCondition",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "rudder_angle",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "wind_direction",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "wind_speed",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": "weather_condition"
+                                }
+                            ],
+                            "_formalism": "python",
+                            "_containerization": true
+                        },
+                        {
+                            "_name": "Analysis",
+                            "_description": "analysis component",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "ShipStatus",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "ShipStatus",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            },
+                                            {
+                                                "_name": "surge_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "sway_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "yaw_rate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "heading",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "x",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "y",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "WeatherCondition",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "WeatherCondition",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "rudder_angle",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "wind_direction",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "wind_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "anomaly",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "AnomalyMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "anomaly",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_threadList": [
+                                {
+                                    "_name": "analyse_trajectory_prediction",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "ShipStatus",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "ShipStatus",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ship_prediction_model",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "string"
+                                                    },
+                                                    {
+                                                        "_name": "surge_speed",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "sway_speed",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "yaw_rate",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "heading",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "x",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "y",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "WeatherCondition",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "WeatherCondition",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "rudder_angle",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "wind_direction",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "wind_speed",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "anomaly",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "AnomalyMessage",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "anomaly",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": "new_data"
+                                }
+                            ],
+                            "_formalism": "python",
+                            "_containerization": true
+                        },
+                        {
+                            "_name": "Plan",
+                            "_description": "plan component",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "ShipStatus",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "ShipStatus",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            },
+                                            {
+                                                "_name": "surge_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "sway_speed",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "yaw_rate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "heading",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "x",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "y",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_plan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewPlanMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "New_plan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "Model",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "Model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_threadList": [
+                                {
+                                    "_name": "planner",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "ShipStatus",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "ShipStatus",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ship_prediction_model",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "string"
+                                                    },
+                                                    {
+                                                        "_name": "surge_speed",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "sway_speed",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "yaw_rate",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "heading",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "x",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "y",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "new_plan",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "NewPlanMessage",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "New_plan",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "Model",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "Model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ship_prediction_model",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "string"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": "anomaly"
+                                }
+                            ],
+                            "_formalism": "python",
+                            "_containerization": true
+                        },
+                        {
+                            "_name": "Execute",
+                            "_description": "execute component",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "isLegit",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event data",
+                                    "_message": {
+                                        "_name": "LegitimateMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "legitimate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "Model",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "Model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_model",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "Model",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ship_prediction_model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "string"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_threadList": [
+                                {
+                                    "_name": "executer",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "isLegit",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event data",
+                                            "_message": {
+                                                "_name": "LegitimateMessage",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "legitimate",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "Model",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "Model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ship_prediction_model",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "string"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "new_model",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "Model",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ship_prediction_model",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "string"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": "new_plan"
+                                }
+                            ],
+                            "_formalism": "python",
+                            "_containerization": true
+                        }
+                    ],
+                    "_IP": "192.168.0.172",
+                    "rap_backbone": true
+                }
+            ]
+        },
+        {
+            "_name": "managedSystem",
+            "_description": "managed system part",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "ship_status",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "outport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "ShipStatus",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "ship_prediction_model",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "string"
+                            },
+                            {
+                                "_name": "surge_speed",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "sway_speed",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "yaw_rate",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "heading",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "x",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            },
+                            {
+                                "_name": "y",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_name": "weather_condition",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "outport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "WeatherCondition",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "rudder_angle",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            },
+                            {
+                                "_name": "wind_direction",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            },
+                            {
+                                "_name": "wind_speed",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_name": "new_model",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "inport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "Model",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "ship_prediction_model",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "string"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "_systemList": [],
+            "_processList": [],
+            "_messageList": [],
+            "_processorList": [
+                {
+                    "_name": "Raspberry Pi 4B",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "I2",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "port",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event data",
+                            "_message": null
+                        }
+                    ],
+                    "_propertyList": [
+                        {
+                            "_name": "MIPSCapacity",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_value": 2000.0,
+                            "_dataType": "MIPS"
+                        }
+                    ],
+                    "_bindingList": [],
+                    "_IP": "localhost",
+                    "rap_backbone": false
+                }
+            ]
+        }
+    ],
+    "_processList": [],
+    "_messageList": [
+        {
+            "_name": "ShipStatus",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "ship_prediction_model",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "string"
+                },
+                {
+                    "_name": "surge_speed",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Float_64"
+                },
+                {
+                    "_name": "sway_speed",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Float_64"
+                },
+                {
+                    "_name": "yaw_rate",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Float_64"
+                },
+                {
+                    "_name": "heading",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Float_64"
+                },
+                {
+                    "_name": "x",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Array"
+                },
+                {
+                    "_name": "y",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Array"
+                }
+            ]
+        },
+        {
+            "_name": "WeatherCondition",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "rudder_angle",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Array"
+                },
+                {
+                    "_name": "wind_direction",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Array"
+                },
+                {
+                    "_name": "wind_speed",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Array"
+                }
+            ]
+        },
+        {
+            "_name": "AnomalyMessage",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "anomaly",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Boolean"
+                }
+            ]
+        },
+        {
+            "_name": "NewPlanMessage",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "New_plan",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Boolean"
+                }
+            ]
+        },
+        {
+            "_name": "Model",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "ship_prediction_model",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "string"
+                }
+            ]
+        }
+    ],
+    "_processorList": []
+}

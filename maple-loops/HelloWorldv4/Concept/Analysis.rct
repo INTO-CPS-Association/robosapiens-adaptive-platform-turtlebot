@@ -1,0 +1,64 @@
+package Analyse
+
+import MAPLEK::*
+import Knowledge::*
+
+stm Analyse {
+	uses Adaptation_AnalysisResults_events
+	uses Adaptation_AnalysisResults_set_events
+	uses Adaptation_RecordedData_events
+	
+	event processedData : LidarRange
+	event anomalyFound
+	
+	var data : LidarRange
+	
+	initial i0
+	state Initialise {
+	}
+	state WaitForData {
+	}
+	state AnalyseAnomaly {
+	}
+	state AnalysisComplete {
+	}
+	transition t0 {
+		from i0
+		to Initialise
+	}
+	transition t1 {
+		from Initialise
+		to WaitForData
+	}
+	transition t2 {
+		from WaitForData
+		to AnalyseAnomaly
+		trigger processedData ? data
+	}
+	transition t3 {
+		from AnalyseAnomaly
+		to AnalysisComplete
+	}
+	transition t4 {
+		from AnalysisComplete
+		to WaitForData
+		condition anomalyDetected
+		action anomalyFound ; awaitingAdaptation = true ; anomalyDetected = false
+	}
+    var anomalyDetected : boolean
+	transition t5 {
+		from AnalysisComplete
+		to WaitForData
+		condition not anomalyDetected
+	}
+	var awaitingAdaptation : boolean
+	event adaptationCompleted
+
+	transition t6 {
+		from WaitForData
+		to WaitForData
+		trigger adaptationCompleted
+		action awaitingAdaptation = false
+	}
+}
+

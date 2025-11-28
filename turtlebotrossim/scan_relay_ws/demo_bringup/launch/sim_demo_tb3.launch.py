@@ -21,6 +21,9 @@ def generate_launch_description():
     )
     demo_bringup_dir = get_package_share_directory("demo_bringup")
     params_path = PathJoinSubstitution([demo_bringup_dir, "config", "tb3_nav2.yaml"])
+    rviz_path = PathJoinSubstitution(
+        [demo_bringup_dir, "launch", "other", "nav2_default_view.rviz"]
+    )
 
     nav2_launch_file = os.path.join(
         get_package_share_directory("nav2_bringup"),
@@ -32,6 +35,7 @@ def generate_launch_description():
         launch_arguments=[
             ("headless", "False"),
             ("params_file", params_path),
+            ("rviz_config_file", rviz_path),
         ],
     )
 

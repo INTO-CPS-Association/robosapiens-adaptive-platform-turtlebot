@@ -1,0 +1,4 @@
+<launch>
+    <node name="Monitor" path="Realization/ManagingSystem/Nodes/Monitor"/>
+    <node name="Analysis" path="Realization/ManagingSystem/Nodes/Analysis"/>
+</launch>

@@ -1,0 +1,32 @@
+{
+  "name": "RoboSapiens Adaptive Platform -- Full Gazebo TB3 (No GPU)",
+  "dockerComposeFile": "../../docker/docker-compose.yaml",
+  "service": "devfullnogputb3",
+  "runServices": [
+    "devfullnogputb3"
+  ],
+  "workspaceFolder": "/ws",
+  "shutdownAction": "stopCompose",
+  "containterUser": "devuser",
+  "mounts": [
+    "source=${localWorkspaceFolder}/,target=/ws,type=bind,consistency=cached"
+  ],
+  "postCreateCommand": "/bin/bash -c \"uv venv && uv pip install --link-mode=copy -r requirements.txt\"",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        }
+      },
+      "extensions": [
+        "ms-toolsai.jupyter",
+        "ms-toolsai.vscode-jupyter-powertoys",
+        "ms-python.python"
+      ]
+    }
+  }
+}

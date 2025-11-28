@@ -1,0 +1,130 @@
+package MAPLEK
+
+import Monitor::Monitor
+import Analyse::Analyse
+import Plan::Plan
+import Legitimate::Legitimate
+import Execute::Execute
+import Knowledge::*
+
+datatype LidarRange {
+	angleMin: real
+	angleMax: real
+	angleIncrement: real
+	timeIncrement: real
+	rangeMin: real
+	rangeMax: real
+	scanTime: real
+	ranges: Seq(real)
+	intensities: Seq(real)
+}
+
+datatype SpinConfig {
+	commands: Seq(SpinCommand)
+	period: int
+}
+
+datatype SpinCommand {
+	angleVelocity: real
+	duration: real
+}
+
+datatype BoolLidarMask {
+	values: Seq(boolean)
+	baseAngle: real
+}
+
+datatype ProbLidarMask {
+	values: Seq(real)
+	baseAngle: real
+}
+
+
+interface Adaptation_Inputs {
+	event lidarData : LidarRange
+}
+
+interface Adaptation_Outputs {
+	event spinConfig : SpinConfig
+}
+
+interface Adaptation_RecordedData {
+	var lidarScans : Seq(LidarRange)
+}
+
+interface Adaptation_AnalysisResults {
+	var boolLidarMasks : Seq(BoolLidarMask)
+	var probLidarMasks : Seq(ProbLidarMask)
+}
+
+interface Adaptation_PlanData {
+	var directions: Seq(SpinCommand)
+}
+
+interface Adaptation_VerificationInfo {
+}
+
+controller Adaptation {
+	uses Adaptation_Inputs
+	uses Adaptation_Outputs
+	uses Adaptation_RecordedData_events
+	uses Adaptation_AnalysisResults_events
+	uses Adaptation_PlanData_events
+	uses Adaptation_VerificationInfo_events
+	sref stm_ref0 = Monitor
+	sref stm_ref1 = Analyse
+	sref stm_ref2 = Plan
+	sref stm_ref3 = Legitimate
+	sref stm_ref4 = Execute
+	sref stm_ref5 = Knowledge
+	
+	// inputs/outputs
+	connection Adaptation on lidarData to stm_ref0 on lidarData
+	connection stm_ref4 on spinConfig to Adaptation on spinConfig
+	
+	// control flow events
+	connection stm_ref0 on processedData to stm_ref1 on processedData
+	connection stm_ref1 on anomalyFound to stm_ref2 on requestPlan
+	connection stm_ref2 on planningCompleted to stm_ref3 on verifyPlan
+	connection stm_ref3 on planRejected to stm_ref2 on planRejected
+	connection stm_ref3 on planAccepted to stm_ref4 on executePlan
+	connection stm_ref4 on adaptationCompleted to stm_ref1 on adaptationCompleted
+	
+	// Knowledge Events - Monitor
+	connection stm_ref5 on lidarScans to stm_ref0 on lidarScans
+	connection stm_ref0 on get_lidarScans to stm_ref5 on get_lidarScans
+	connection stm_ref0 on set_lidarScans to stm_ref5 on set_lidarScans
+	
+	// Knowledge Events - Analyse
+	connection stm_ref5 on boolLidarMasks to stm_ref1 on boolLidarMasks
+	connection stm_ref5 on probLidarMasks to stm_ref1 on probLidarMasks
+	connection stm_ref1 on get_boolLidarMasks to stm_ref5 on get_boolLidarMasks
+	connection stm_ref1 on get_probLidarMasks to stm_ref5 on get_probLidarMasks
+	connection stm_ref1 on set_boolLidarMasks to stm_ref5 on set_boolLidarMasks
+	connection stm_ref1 on set_probLidarMasks to stm_ref5 on set_probLidarMasks
+	connection stm_ref5 on lidarScans_Analyse to stm_ref1 on lidarScans
+	connection stm_ref1 on get_lidarScans to stm_ref5 on get_lidarScans_Analyse
+	
+	// Knowledge Events - Plan
+	connection stm_ref5 on directions to stm_ref2 on directions
+	connection stm_ref2 on set_directions to stm_ref5 on set_directions
+	connection stm_ref5 on lidarScans_Plan to stm_ref2 on lidarScans
+	connection stm_ref5 on boolLidarMasks_Plan to stm_ref2 on boolLidarMasks
+	connection stm_ref5 on probLidarMasks_Plan to stm_ref2 on probLidarMasks
+	
+	// Knowledge Events - Legitimate
+	connection stm_ref5 on lidarScans_Legitimate to stm_ref3 on lidarScans
+	connection stm_ref5 on boolLidarMasks_Legitimate to stm_ref3 on boolLidarMasks
+	connection stm_ref5 on probLidarMasks_Legitimate to stm_ref3 on probLidarMasks
+	connection stm_ref5 on directions_Legitimate to stm_ref3 on directions
+	
+	// Knowledge Events - Execute
+	connection stm_ref5 on directions_Execute to stm_ref4 on directions
+	
+	// Knowledge Events - external
+	connection stm_ref5 on lidarScans_ext to Adaptation on lidarScans
+	connection stm_ref5 on boolLidarMasks_ext to Adaptation on boolLidarMasks
+	connection stm_ref5 on probLidarMasks_ext to Adaptation on probLidarMasks
+	connection stm_ref5 on directions_ext to Adaptation on directions
+}
+

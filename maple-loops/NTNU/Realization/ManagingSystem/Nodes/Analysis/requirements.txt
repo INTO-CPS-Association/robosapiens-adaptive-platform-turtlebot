@@ -1,0 +1,5 @@
+robosapiensio==0.3.21
+jsonpickle==3.3.0
+paho-mqtt==2.1.0
+PyYAML==6.0.2
+pandas

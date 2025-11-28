@@ -1,0 +1,6 @@
+[submodule "turtlebotrossim/scan_relay_ws/3rdparties/frozen"]
+	path = turtlebotrossim/scan_relay_ws/3rdparties/frozen
+	url = git@github.com:serge-sans-paille/frozen.git
+[submodule "maple-loops/HelloWorldv5/Realization"]
+	path = maple-loops/HelloWorldv5/Realization
+	url = https://github.com/saharnn96/rpio-HelloWorldv5.git

@@ -1,0 +1,1699 @@
+{
+    "_name": "adaptiveSystem",
+    "_description": "Example adaptive system",
+    "_verbose": false,
+    "_featureList": [],
+    "_systemList": [
+        {
+            "_name": "managingSystem",
+            "_description": "managing system part",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "laser_scan",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "inport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "LaserScan",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "ranges",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            },
+                            {
+                                "_name": "angle_increment",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_name": "direction",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "outport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "Direction",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "omega",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "duration",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "_systemList": [],
+            "_processList": [
+                {
+                    "_name": "Monitor",
+                    "_description": "monitor component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "laser_scan",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "LaserScan",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ranges",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "angle_increment",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "new_data",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "NewDataEvent",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "new_data",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "monitor_data",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "laser_scan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "LaserScan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ranges",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "angle_increment",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_data",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewDataEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "new_data",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "Scan"
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                },
+                {
+                    "_name": "Analysis",
+                    "_description": "analysis component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "laser_scan",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "LaserScan",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ranges",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "angle_increment",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "anomaly",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "AnomalyEvent",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "anomaly",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "analyse_scan_data",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "laser_scan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "LaserScan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ranges",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "angle_increment",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "anomaly",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "AnomalyEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "anomaly",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "new_data"
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                },
+                {
+                    "_name": "Plan",
+                    "_description": "plan component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "laser_scan",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "LaserScan",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "ranges",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Array"
+                                    },
+                                    {
+                                        "_name": "angle_increment",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "new_plan",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "NewPlanEvent",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "NewPlan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "direction",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "Direction",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "omega",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "duration",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "planner",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "laser_scan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "LaserScan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ranges",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "angle_increment",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_plan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewPlanEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "NewPlan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "direction",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "Direction",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "omega",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "duration",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "anomaly"
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                },
+                {
+                    "_name": "Legitimate",
+                    "_description": "legitimate component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "new_plan",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "NewPlanEvent",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "NewPlan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "isLegit",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "LegitimateMessage",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "legitimate",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "legitimize",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "new_plan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewPlanEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "NewPlan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "isLegit",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "LegitimateMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "legitimate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": "new_plan"
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                },
+                {
+                    "_name": "Execute",
+                    "_description": "execute component",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "new_plan",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "NewPlanEvent",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "NewPlan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "isLegit",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event",
+                            "_message": {
+                                "_name": "LegitimateMessage",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "legitimate",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Boolean"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "directions",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "inport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data",
+                            "_message": {
+                                "_name": "Direction",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "omega",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "duration",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_name": "/spin_config",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "outport",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "data event",
+                            "_message": {
+                                "_name": "Direction",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureList": [
+                                    {
+                                        "_name": "omega",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    },
+                                    {
+                                        "_name": "duration",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureType": "feature",
+                                        "_dataType": "Float_64"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "_threadList": [
+                        {
+                            "_name": "executer",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "new_plan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewPlanEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "NewPlan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "isLegit",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "LegitimateMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "legitimate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "directions",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "Direction",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "omega",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "duration",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "/spin_config",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data event",
+                                    "_message": {
+                                        "_name": "Direction",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "omega",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "duration",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_eventTrigger": null
+                        }
+                    ],
+                    "_formalism": "python",
+                    "_containerization": true
+                }
+            ],
+            "_messageList": [],
+            "_processorList": [
+                {
+                    "_name": "PC",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureList": [
+                        {
+                            "_name": "I1",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_featureType": "port",
+                            "_initialValue": 1.0,
+                            "_valueReference": 1,
+                            "_type": "event data",
+                            "_message": null
+                        }
+                    ],
+                    "_propertyList": [
+                        {
+                            "_name": "MIPSCapacity",
+                            "_description": "tbd",
+                            "_verbose": false,
+                            "_value": 1000.0,
+                            "_dataType": "MIPS"
+                        }
+                    ],
+                    "_bindingList": [
+                        {
+                            "_name": "Monitor",
+                            "_description": "monitor component",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "laser_scan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "LaserScan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ranges",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "angle_increment",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_data",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewDataEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "new_data",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_threadList": [
+                                {
+                                    "_name": "monitor_data",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "laser_scan",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "LaserScan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ranges",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "angle_increment",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "new_data",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "NewDataEvent",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "new_data",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": "Scan"
+                                }
+                            ],
+                            "_formalism": "python",
+                            "_containerization": true
+                        },
+                        {
+                            "_name": "Analysis",
+                            "_description": "analysis component",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "laser_scan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "LaserScan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ranges",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "angle_increment",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "anomaly",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "AnomalyEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "anomaly",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_threadList": [
+                                {
+                                    "_name": "analyse_scan_data",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "laser_scan",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "LaserScan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ranges",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "angle_increment",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "anomaly",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "AnomalyEvent",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "anomaly",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": "new_data"
+                                }
+                            ],
+                            "_formalism": "python",
+                            "_containerization": true
+                        },
+                        {
+                            "_name": "Plan",
+                            "_description": "plan component",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "laser_scan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "LaserScan",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "ranges",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Array"
+                                            },
+                                            {
+                                                "_name": "angle_increment",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "new_plan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewPlanEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "NewPlan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "direction",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "Direction",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "omega",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "duration",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_threadList": [
+                                {
+                                    "_name": "planner",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "laser_scan",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "LaserScan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "ranges",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Array"
+                                                    },
+                                                    {
+                                                        "_name": "angle_increment",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "new_plan",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "NewPlanEvent",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "NewPlan",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "direction",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "Direction",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "omega",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "duration",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": "anomaly"
+                                }
+                            ],
+                            "_formalism": "python",
+                            "_containerization": true
+                        },
+                        {
+                            "_name": "Execute",
+                            "_description": "execute component",
+                            "_verbose": false,
+                            "_featureList": [
+                                {
+                                    "_name": "new_plan",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "NewPlanEvent",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "NewPlan",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "isLegit",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "event",
+                                    "_message": {
+                                        "_name": "LegitimateMessage",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "legitimate",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Boolean"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "directions",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "inport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data",
+                                    "_message": {
+                                        "_name": "Direction",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "omega",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "duration",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "_name": "/spin_config",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureType": "outport",
+                                    "_initialValue": 1.0,
+                                    "_valueReference": 1,
+                                    "_type": "data event",
+                                    "_message": {
+                                        "_name": "Direction",
+                                        "_description": "tbd",
+                                        "_verbose": false,
+                                        "_featureList": [
+                                            {
+                                                "_name": "omega",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            },
+                                            {
+                                                "_name": "duration",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureType": "feature",
+                                                "_dataType": "Float_64"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "_threadList": [
+                                {
+                                    "_name": "executer",
+                                    "_description": "tbd",
+                                    "_verbose": false,
+                                    "_featureList": [
+                                        {
+                                            "_name": "new_plan",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "NewPlanEvent",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "NewPlan",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "isLegit",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "event",
+                                            "_message": {
+                                                "_name": "LegitimateMessage",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "legitimate",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Boolean"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "directions",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "inport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data",
+                                            "_message": {
+                                                "_name": "Direction",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "omega",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "duration",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "_name": "/spin_config",
+                                            "_description": "tbd",
+                                            "_verbose": false,
+                                            "_featureType": "outport",
+                                            "_initialValue": 1.0,
+                                            "_valueReference": 1,
+                                            "_type": "data event",
+                                            "_message": {
+                                                "_name": "Direction",
+                                                "_description": "tbd",
+                                                "_verbose": false,
+                                                "_featureList": [
+                                                    {
+                                                        "_name": "omega",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    },
+                                                    {
+                                                        "_name": "duration",
+                                                        "_description": "tbd",
+                                                        "_verbose": false,
+                                                        "_featureType": "feature",
+                                                        "_dataType": "Float_64"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "_eventTrigger": null
+                                }
+                            ],
+                            "_formalism": "python",
+                            "_containerization": true
+                        }
+                    ],
+                    "_IP": "192.168.0.172",
+                    "rap_backbone": true
+                }
+            ]
+        },
+        {
+            "_name": "managedSystem",
+            "_description": "managed system part",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "laser_scan",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "outport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "LaserScan",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "ranges",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Array"
+                            },
+                            {
+                                "_name": "angle_increment",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "_name": "direction",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "inport",
+                    "_initialValue": 1.0,
+                    "_valueReference": 1,
+                    "_type": "event data",
+                    "_message": {
+                        "_name": "Direction",
+                        "_description": "tbd",
+                        "_verbose": false,
+                        "_featureList": [
+                            {
+                                "_name": "omega",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            },
+                            {
+                                "_name": "duration",
+                                "_description": "tbd",
+                                "_verbose": false,
+                                "_featureType": "feature",
+                                "_dataType": "Float_64"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "_systemList": [],
+            "_processList": [],
+            "_messageList": [],
+            "_processorList": []
+        }
+    ],
+    "_processList": [],
+    "_messageList": [
+        {
+            "_name": "LaserScan",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "ranges",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Array"
+                },
+                {
+                    "_name": "angle_increment",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Float_64"
+                }
+            ]
+        },
+        {
+            "_name": "Direction",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "omega",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Float_64"
+                },
+                {
+                    "_name": "duration",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Float_64"
+                }
+            ]
+        },
+        {
+            "_name": "AnomalyEvent",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "anomaly",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Boolean"
+                }
+            ]
+        },
+        {
+            "_name": "NewPlanEvent",
+            "_description": "tbd",
+            "_verbose": false,
+            "_featureList": [
+                {
+                    "_name": "NewPlan",
+                    "_description": "tbd",
+                    "_verbose": false,
+                    "_featureType": "feature",
+                    "_dataType": "Boolean"
+                }
+            ]
+        }
+    ],
+    "_processorList": []
+}

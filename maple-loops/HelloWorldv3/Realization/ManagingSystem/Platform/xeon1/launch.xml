@@ -1,0 +1,4 @@
+<launch>
+    <node name="Plan" path="Realization/ManagingSystem/Nodes/Plan"/>
+    <node name="Execute" path="Realization/ManagingSystem/Nodes/Execute"/>
+</launch>

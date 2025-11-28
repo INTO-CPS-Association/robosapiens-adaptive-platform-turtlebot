@@ -1,0 +1,44 @@
+[
+  {
+    "label": "DevContainer: Up (TB4)",
+    "command": "devcontainer up --workspace-folder ${ZED_WORKTREE_ROOT} --config .devcontainer/nvidia-full-tb4/devcontainer.json",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "DevContainer: Up (TB3)",
+    "command": "devcontainer up --workspace-folder ${ZED_WORKTREE_ROOT} --config .devcontainer/nvidia-full-tb3/devcontainer.json",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Docker stop",
+    "command": "cd ${ZED_WORKTREE_ROOT}/docker; docker compose stop",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "DevContainer: Build",
+    "command": "devcontainer build --workspace-folder ${ZED_WORKTREE_ROOT} --config .devcontainer/nvidia-full-tb3/devcontainer.json",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "DevContainer: Exec",
+    "command": "devcontainer exec - workspace-folder ${ZED_WORKTREE_ROOT} ${1}",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": true,
+    "reveal": "always"
+  },
+  {
+    "label": "DevContainer: Run User Commands",
+    "command": "devcontainer run-user-commands --workspace-folder ${ZED_WORKTREE_ROOT} --config .devcontainer/nvidia-full-tb4/devcontainer.json",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  }
+]

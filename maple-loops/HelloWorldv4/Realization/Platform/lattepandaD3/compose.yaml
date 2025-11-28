@@ -1,0 +1,31 @@
+# Docker Compose file to run an MQTT broker and the MQTT publisher
+version: '3.10'
+
+services:
+
+  monitor:
+    build:
+        context: ./../../Nodes/Monitor
+        dockerfile: ./Dockerfile
+    container_name: C_Monitor
+    depends_on:
+        emqx-enterprise:
+            condition: service_healthy
+    environment:
+      - BROKER=emqx
+
+  analysis:
+    build:
+        context: ./../../Nodes/Analysis
+        dockerfile: ./Dockerfile
+    container_name: C_Analysis
+    depends_on:
+        emqx-enterprise:
+            condition: service_healthy
+    environment:
+      - BROKER=emqx
+
+
+networks:
+  emqx-net:
+    name: emqx-net

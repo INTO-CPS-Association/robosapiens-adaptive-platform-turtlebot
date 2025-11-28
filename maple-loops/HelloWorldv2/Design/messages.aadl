@@ -1,0 +1,36 @@
+package messages
+public
+	with Base_Types, Data_Model;
+    data LidarRange
+        features
+            angleMin: provides data access Base_Types::Float_64;
+            angleMax: provides data access Base_Types::Float_64;
+            angleIncrement: provides data access Base_Types::Float_64;
+            timeIncrement: provides data access Base_Types::Float_64;
+            rangeMin: provides data access Base_Types::Float_64;
+            rangeMax: provides data access Base_Types::Float_64;
+            scanTime: provides data access Base_Types::Float_64;
+    end LidarRange;
+
+    data SpinConfig
+        features
+    end SpinConfig;
+
+    data SpinCommand
+        features
+            angleVelocity: provides data access Base_Types::Float_64;
+            duration: provides data access Base_Types::Float_64;
+    end SpinCommand;
+
+    data BoolLidarMask
+        features
+            baseAngle: provides data access Base_Types::Float_64;
+    end BoolLidarMask;
+
+    data ProbLidarMask
+        features
+            baseAngle: provides data access Base_Types::Float_64;
+    end ProbLidarMask;
+
+
+end messages;
